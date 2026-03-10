@@ -71,15 +71,6 @@
 #define GPIO_PA23_Get()               ((PIOA_REGS->PIO_PDSR >> 23U) & 0x1U)
 #define GPIO_PA23_PIN                  PIO_PIN_PA23
 
-/*** Macros for GPIO_PA9 pin ***/
-#define GPIO_PA9_Set()               (PIOA_REGS->PIO_SODR = ((uint32_t)1U<<9U))
-#define GPIO_PA9_Clear()             (PIOA_REGS->PIO_CODR = ((uint32_t)1U<<9U))
-#define GPIO_PA9_Toggle()            (PIOA_REGS->PIO_ODSR ^= ((uint32_t)1U<<9U))
-#define GPIO_PA9_OutputEnable()      (PIOA_REGS->PIO_OER = ((uint32_t)1U<<9U))
-#define GPIO_PA9_InputEnable()       (PIOA_REGS->PIO_ODR = ((uint32_t)1U<<9U))
-#define GPIO_PA9_Get()               ((PIOA_REGS->PIO_PDSR >> 9U) & 0x1U)
-#define GPIO_PA9_PIN                  PIO_PIN_PA9
-
 
 // *****************************************************************************
 /* PIO Port

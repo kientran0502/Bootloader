@@ -25,7 +25,7 @@
 28,PE5,,Available,In,,,,,,,
 31,PB3,,Available,In,,,,,,,
 32,PA21,,Available,In,,,,,,,
-34,PD30,,Available,In,,,,,,,
+34,PD30,,UART3_UTXD3,n/a,n/a,No,Disabled,No,No,Disabled,Low
 35,PA7,,Available,In,,,,,,,
 36,PA8,,Available,In,,,,,,,
 37,PA22,,Available,In,,,,,,,
@@ -53,15 +53,15 @@
 63,PD21,,Available,In,,,,,,,
 64,PA11,,Available,In,,,,,,,
 65,PD20,,Available,In,,,,,,,
-66,PA10,,Available,In,,,,,,,
+66,PA10,,UART0_UTXD0,n/a,n/a,No,Disabled,No,No,Disabled,Low
 67,PD19,,Available,In,,,,,,,
 68,PA12,,Available,In,,,,,,,
 69,PD18,,Available,In,,,,,,,
 70,PA27,,Available,In,,,,,,,
-71,PD28,,Available,In,,,,,,,
+71,PD28,,UART3_URXD3,n/a,n/a,No,Disabled,No,No,Disabled,Low
 73,PA5,,Available,In,,,,,,,
 74,PD17,,Available,In,,,,,,,
-75,PA9,GPIO_PA9,GPIO,In,n/a,No,Disabled,Yes,No,Disabled,Low
+75,PA9,,UART0_URXD0,n/a,n/a,No,Disabled,No,No,Disabled,Low
 76,PC28,,Available,In,,,,,,,
 77,PA4,,Available,In,,,,,,,
 78,PD16,,Available,In,,,,,,,

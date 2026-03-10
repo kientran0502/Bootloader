@@ -50,6 +50,16 @@ typedef void (*fpJumpHandler)(void);
 
 typedef struct
 {
+	uint32_t u32SHA_1PaddingBytes[16];
+}TS_SHA_Padding;
+
+typedef struct
+{
+	uint32_t au32ApplicationHashTag[16];
+}TS_SHA_Digest;
+
+typedef struct
+{
 	uint32_t u32ApplicationVersion_Major;
 	uint32_t u32ApplicationVersion_Minor;
 	fpJumpHandler fpApplicationJumpHandler;
@@ -70,8 +80,8 @@ typedef union
 typedef struct
 {
 	TU_ApplicationData uApplicationData;
-//	TS_SHA_Padding sSHA_Padding;
-//	TS_SHA_Digest sSHA_Digest;
+	TS_SHA_Padding sSHA_Padding;
+	TS_SHA_Digest sSHA_Digest;
 }TS_ApplicationFooter;
 
 
@@ -87,8 +97,8 @@ const TS_ApplicationFooter sUserApplicationFooter =
 		U32_USER_APPLICATION_START_ADDRESS,
 		U32_USER_APPLICATION_ALLOCATED_SIZE,
 	},
-//	{0},
-//	{0},
+	{0},
+	{0},
 };
 
 
@@ -101,11 +111,11 @@ int main ( void )
     {
         /* Maintain state machines of all polled MPLAB Harmony modules. */
 //        SYS_Tasks ( );
-        GPIO_PA23_Set();
-//        for(int i = 0; i <= 8000000; i++)
-//        {
-//            __NOP();
-//        }
+        GPIO_PA23_Toggle();
+        for(int i = 0; i <= 128000000; i++)
+        {
+            __NOP();
+        }
     }
 
     /* Execution should not come here during normal operation */

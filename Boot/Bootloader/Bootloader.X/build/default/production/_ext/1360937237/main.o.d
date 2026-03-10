@@ -108,6 +108,7 @@ build/default/production/_ext/1360937237/main.o: ../src/main.c \
  ../src/config/default/device_cache.h ../src/config/default/device.h \
  ../src/config/default/toolchain_specifics.h \
  ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h \
+ ../src/config/default/peripheral/uart/plib_uart0.h \
  ../src/config/default/peripheral/clk/plib_clk.h \
  ../src/config/default/peripheral/pio/plib_pio.h \
  ../src/config/default/peripheral/nvic/plib_nvic.h \
@@ -222,6 +223,7 @@ build/default/production/_ext/1360937237/main.o: ../src/main.c \
 ../src/config/default/device.h:
 ../src/config/default/toolchain_specifics.h:
 ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h:
+../src/config/default/peripheral/uart/plib_uart0.h:
 ../src/config/default/peripheral/clk/plib_clk.h:
 ../src/config/default/peripheral/pio/plib_pio.h:
 ../src/config/default/peripheral/nvic/plib_nvic.h:

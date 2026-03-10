@@ -127,6 +127,8 @@ void SYS_Initialize ( void* data )
 
 	UART3_Initialize();
 
+	UART0_Initialize();
+
 	RSWDT_REGS->RSWDT_MR = RSWDT_MR_WDDIS_Msk;	// Disable RSWDT 
 
 	WDT_REGS->WDT_MR = WDT_MR_WDDIS_Msk; 		// Disable WDT 

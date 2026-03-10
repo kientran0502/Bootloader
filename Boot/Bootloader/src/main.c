@@ -45,6 +45,16 @@ typedef void (*fpJumpHandler)(void);
 
 typedef struct
 {
+	uint32_t u32SHA_1PaddingBytes[16];
+}TS_SHA_Padding;
+
+typedef struct
+{
+	uint32_t au32ApplicationHashTag[16];
+}TS_SHA_Digest;
+
+typedef struct
+{
 	uint32_t u32ApplicationVersion_Major;
 	uint32_t u32ApplicationVersion_Minor;
 	fpJumpHandler fpApplicationJumpHandler;
@@ -63,8 +73,8 @@ typedef union
 typedef struct
 {
 	TU_ApplicationData uApplicationData;
-//	TS_SHA_Padding sSHA_Padding;
-//	TS_SHA_Digest sSHA_Digest;
+	TS_SHA_Padding sSHA_Padding;
+	TS_SHA_Digest sSHA_Digest;
 }TS_ApplicationFooter;
 
 
@@ -88,8 +98,8 @@ const TS_ApplicationFooter sBootLoaderFooter =
 		U32_USER_APPLICATION_START_ADDRESS,
 		U32_USER_APPLICATION_ALLOCATED_SIZE,
 	},
-//	{0},
-//	{0},
+	{0},
+	{0},
 };
 
 //__attribute__((section(".ApplicationFooterData"), used))
@@ -115,7 +125,17 @@ const TS_ApplicationFooter sBootLoaderFooter =
 __attribute__ ((section(".JumpSignatureData")))
 static uint8_t mau8JumpSignature[32];
 
-//COMPILER_ALIGNED(128)
+//COMPILER_ALIGNED(128
+
+char str[64] = {0};
+
+void delay(uint8_t time)
+{
+    for(int i = 0; i <= 1000000*time ; i++)
+    {
+        __NOP();
+    }
+}
 
 int main ( void )
 {
@@ -129,18 +149,17 @@ int main ( void )
     {
         /* Maintain state machines of all polled MPLAB Harmony modules. */
 //        SYS_Tasks ( );
-		GPIO_PA23_Toggle();
+//		GPIO_PA23_Toggle();
 
 //        if(PIO_PortRead(PIO_PIN_PA9) == 0)
 //        {
-                    // Unlock CTLPPBLOCK (clear bits 31:28 an to�n nh?t)
-            *((volatile uint32_t *)0xE000E008) &= ~0xF0000000UL;  // Ho?c SCB->ACTLR n?u header c�
+//        sprintf(str, "Jump To App\n", 13);
+//        UART3_Write("Jump To App\n", 13);
+//        delay(16);
             JumpToUserApplication();
 //        }
-		for(int i = 0; i <= 64000000; i++)
-		{
-			__NOP();
-		}
+          
+            delay(64);
     }
 
     /* Execution should not come here during normal operation */
@@ -164,7 +183,34 @@ static void JumpToUserApplication(void)
 	/** Release Resources before jumping to User Application */
 //	udc_stop();
 //	sysclk_disable_peripheral_clock(CONSOLE_UART_ID);
+    
+    pCurrentApplicationData = P_GetApplicationData();
+    sprintf(str, "pCurrentApplicationData: %X\n", pCurrentApplicationData, 64);
+    UART3_Write(str, 64);
+    delay(16);
+    
+    pUserApplicationData = (TS_ApplicationData*)(pCurrentApplicationData->u32UserApplicationStartAddress +
+		pCurrentApplicationData->u32UserApplicationAllocationSize - sizeof(TS_ApplicationFooter));
+    sprintf(str, "pCurrentApplicationData: %X\n", pUserApplicationData, 64);
+    UART3_Write(str, 64);
+    delay(16);
+    
+	sprintf(str, "SCB->VTOR: %X\n", pUserApplicationData->u32UserApplicationStartAddress, 64);
+    UART3_Write(str, 64);
+    delay(16);
+    
+    	/** Update stack pointer */
+	u32StackPointerValue = (uint32_t)(*(uint32_t *)(pUserApplicationData->u32UserApplicationStartAddress));
+    sprintf(str, "u32StackPointerValue: %X\n", u32StackPointerValue, 64);
+    UART3_Write(str, 64);
+    delay(16);
 	
+	/** Call Application reset handler */
+	fpApplicationResetHandler = (fpJumpHandler)(*((uint32_t*)(pUserApplicationData->u32UserApplicationStartAddress + 4)));
+    sprintf(str, "fpApplicationResetHandler: %X\n", fpApplicationResetHandler, 64);
+    UART3_Write(str, 64);
+    delay(16);
+    
 	/** Disable interrupts */
 	__disable_irq();
 	
@@ -173,6 +219,7 @@ static void JumpToUserApplication(void)
 	
 	pUserApplicationData = (TS_ApplicationData*)(pCurrentApplicationData->u32UserApplicationStartAddress +
 		pCurrentApplicationData->u32UserApplicationAllocationSize - sizeof(TS_ApplicationFooter));
+    
 	
 	/** Barriers */
 	__DSB();
@@ -180,7 +227,6 @@ static void JumpToUserApplication(void)
 
 	/** Update vector table */
 	SCB->VTOR = pUserApplicationData->u32UserApplicationStartAddress & SCB_VTOR_TBLOFF_Msk;
-//    SCB->VTOR = 0x00410000;
 	
 	/** Barriers */
 	__DSB();
@@ -196,6 +242,7 @@ static void JumpToUserApplication(void)
 	/** Call Application reset handler */
 	fpApplicationResetHandler = (fpJumpHandler)(*((uint32_t*)(pUserApplicationData->u32UserApplicationStartAddress + 4)));
 	(*fpApplicationResetHandler)();
+    
 }
 
 
