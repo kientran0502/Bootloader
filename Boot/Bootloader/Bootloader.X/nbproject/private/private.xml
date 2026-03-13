@@ -3,11 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hoang/MPLABXProjects/Projects/Boot/Bootloader/src/main.c</file>
-            <file>file:/C:/Users/hoang/MPLABXProjects/Projects/Boot/Bootloader/src/config/default/ATSAMV71Q21B.ld</file>
-            <file>file:/C:/Users/hoang/MPLABXProjects/Projects/Boot/Bootloader/src/config/default/initialization.c</file>
-            <file>file:/C:/Users/hoang/MPLABXProjects/Projects/Boot/Bootloader/src/config/default/startup_xc32.c</file>
-            <file>file:/C:/Users/hoang/MPLABXProjects/Projects/Boot/Bootloader/src/packs/CMSIS/CMSIS/Core/Include/core_cm7.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/AppFlash.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/peripheral/efc/plib_efc.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/main.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/AppUART.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/packs/ATSAMV71Q21B_DFP/component/efc.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/AppAES_ICM.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/packs/CMSIS/CMSIS/Core/Include/cachel1_armv7.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/dev/M2_BSP/UART/uart_irq.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/peripheral/uart/plib_uart3.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/peripheral/efc/plib_efc.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/initialization.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/exceptions.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/AppDef.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/packs/ATSAMV71Q21B_DFP/samv71q21b.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/dev/M2_BSP/UART/uart_irq.c</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/ATSAMV71Q21B.ld</file>
         </group>
     </open-files>
 </project-private>

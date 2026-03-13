@@ -27,5 +27,27 @@ data:
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
-  symbols: {}
+  symbols:
+    BRG_VALUE:
+      attributes:
+        id: BRG_VALUE
+      children:
+      - children:
+        - attributes:
+            id: uart0
+            value: '81'
+          type: Dynamic
+        type: Values
+      type: Integer
+    UART_CLOCK_FREQ:
+      attributes:
+        id: UART_CLOCK_FREQ
+      children:
+      - children:
+        - attributes:
+            id: uart0
+            value: '150000000'
+          type: Dynamic
+        type: Values
+      type: Integer
   userData: {}

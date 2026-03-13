@@ -33,6 +33,27 @@
           <itemPath>../src/config/default/device_vectors.h</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="dev" displayName="dev" projectFiles="true">
+        <logicalFolder name="M2_BSP" displayName="M2_BSP" projectFiles="true">
+          <logicalFolder name="App" displayName="App" projectFiles="true">
+          </logicalFolder>
+          <logicalFolder name="UART" displayName="UART" projectFiles="true">
+            <itemPath>../src/dev/M2_BSP/UART/uart_dma.h</itemPath>
+            <itemPath>../src/dev/M2_BSP/UART/uart_irq.h</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="M5_Utils" displayName="M5_Utils" projectFiles="true">
+          <logicalFolder name="Define" displayName="Define" projectFiles="true">
+            <itemPath>../src/dev/M5_Utils/Define/define.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="prnf" displayName="prnf" projectFiles="true">
+            <itemPath>../src/dev/M5_Utils/prnf/prnf.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="RingBuffer" displayName="RingBuffer" projectFiles="true">
+            <itemPath>../src/dev/M5_Utils/RingBuffer/ring_buffer.h</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+      </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="ATSAMV71Q21B_DFP"
                        displayName="ATSAMV71Q21B_DFP"
@@ -225,9 +246,75 @@
           <itemPath>../src/config/default/libc_syscalls.c</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="src" displayName="src" projectFiles="true">
+        <logicalFolder name="config" displayName="config" projectFiles="true">
+          <logicalFolder name="default" displayName="default" projectFiles="true">
+            <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
+              <logicalFolder name="clk" displayName="clk" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="efc" displayName="efc" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="nvic" displayName="nvic" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="pio" displayName="pio" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="uart" displayName="uart" projectFiles="true">
+              </logicalFolder>
+            </logicalFolder>
+            <logicalFolder name="stdio" displayName="stdio" projectFiles="true">
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="dev" displayName="dev" projectFiles="true">
+          <logicalFolder name="M2_BSP" displayName="M2_BSP" projectFiles="true">
+            <logicalFolder name="App" displayName="App" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="UART" displayName="UART" projectFiles="true">
+              <itemPath>../src/dev/M2_BSP/UART/uart_dma.c</itemPath>
+              <itemPath>../src/dev/M2_BSP/UART/uart_irq.c</itemPath>
+            </logicalFolder>
+          </logicalFolder>
+          <logicalFolder name="M5_Utils" displayName="M5_Utils" projectFiles="true">
+            <logicalFolder name="Define" displayName="Define" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="prnf" displayName="prnf" projectFiles="true">
+              <itemPath>../src/dev/M5_Utils/prnf/prnf.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="RingBuffer" displayName="RingBuffer" projectFiles="true">
+              <itemPath>../src/dev/M5_Utils/RingBuffer/ring_buffer.c</itemPath>
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="packs" displayName="packs" projectFiles="true">
+          <logicalFolder name="ATSAMV71Q21B_DFP"
+                         displayName="ATSAMV71Q21B_DFP"
+                         projectFiles="true">
+            <logicalFolder name="component" displayName="component" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="instance" displayName="instance" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="pio" displayName="pio" projectFiles="true">
+            </logicalFolder>
+          </logicalFolder>
+          <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+            <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+              <logicalFolder name="Core" displayName="Core" projectFiles="true">
+                <logicalFolder name="Include" displayName="Include" projectFiles="true">
+                </logicalFolder>
+              </logicalFolder>
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
+        <itemPath>../src/AppAES_ICM.c</itemPath>
+        <itemPath>../src/AppFlash.c</itemPath>
+        <itemPath>../src/AppUART.c</itemPath>
+      </logicalFolder>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>../src</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
@@ -242,8 +329,8 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="SAMV71_DFP" vendor="Microchip" version="4.12.237"/>
         <pack name="CMSIS" vendor="ARM" version="6.3.0"/>
+        <pack name="SAMV71_DFP" vendor="Microchip" version="4.12.237"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -289,7 +376,7 @@
         <property key="exclude-floating-point" value="false"/>
         <property key="expand-pragma-config" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/ATSAMV71Q21B_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include"/>
+                  value="../src;../src/config/default;../src/packs/ATSAMV71Q21B_DFP;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;..\src\dev"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

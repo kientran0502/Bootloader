@@ -31,6 +31,7 @@
 // ***************************** INCLUDE ************************************************
 #include <stdint.h>
 #include <string.h>
+#include "peripheral/efc/plib_efc.h"
 
 // ****************************** DEFINE ***********************************************
 #define U32_USB_CDC_BOOTLOADER_SW_RELEASE_MAJOR_VERSION		((uint32_t)0x1)
@@ -102,24 +103,6 @@ const TS_ApplicationFooter sBootLoaderFooter =
 	{0},
 };
 
-//__attribute__((section(".ApplicationFooterData"), used))
-//const TS_ApplicationFooter sBootLoaderFooter =
-//{
-//    .uApplicationData =
-//    {
-//        .sApplicationData =
-//        {
-//            U32_USB_CDC_BOOTLOADER_SW_RELEASE_MAJOR_VERSION,
-//            U32_USB_CDC_BOOTLOADER_SW_RELEASE_MINOR_VERSION,
-//            BootloaderJumpHandler,
-//            U32_BOOT_LOADER_APPLICATION_START_ADDRESS,
-//            U32_BOOT_LOADER_APPLICATION_ALLOCATED_SIZE,
-//            U32_USER_APPLICATION_START_ADDRESS,
-//            U32_USER_APPLICATION_ALLOCATED_SIZE
-//        }
-//    }
-//};
-
 // *****************************************************************************
 
 __attribute__ ((section(".JumpSignatureData")))
@@ -128,6 +111,7 @@ static uint8_t mau8JumpSignature[32];
 //COMPILER_ALIGNED(128
 
 char str[64] = {0};
+uint32_t arr[128] = {132, 124, 38, 54, 5, 6};
 
 void delay(uint8_t time)
 {
@@ -154,10 +138,52 @@ int main ( void )
 //        if(PIO_PortRead(PIO_PIN_PA9) == 0)
 //        {
 //        sprintf(str, "Jump To App\n", 13);
-//        UART3_Write("Jump To App\n", 13);
+        UART3_Write("Jump To App\n", 13);
 //        delay(16);
-            JumpToUserApplication();
+            // JumpToUserApplication();
 //        }
+		// InitFlashWaitStates();
+        uint32_t addr = U32_USER_APPLICATION_START_ADDRESS;
+
+        SCB_DisableICache();
+        SCB_DisableDCache();
+
+        while(EFC_IsBusy());
+        EFC_RegionUnlock(addr);
+
+        while(EFC_IsBusy());
+        EFC_SectorErase(addr);
+
+        while(EFC_IsBusy());
+        EFC_PageWrite(arr, addr);
+
+        while(EFC_IsBusy());
+        
+        uint32_t *p = (uint32_t*)U32_USER_APPLICATION_START_ADDRESS;
+
+        sprintf(str, "%d\n",  p[0], 3);
+        UART3_Write(str, 3);
+        delay(32);
+        
+        sprintf(str, "%d\n",  p[1], 3);
+        UART3_Write(str, 3);
+        delay(32);
+        
+        sprintf(str, "%d\n",  p[2], 3);
+        UART3_Write(str, 3);
+        delay(32);
+        
+        sprintf(str, "%d\n",  p[3], 3);
+        UART3_Write(str, 3);
+        delay(32);
+        
+      
+        /* invalidate cache */
+        SCB_InvalidateICache();
+        SCB_InvalidateDCache();
+
+        SCB_EnableICache();
+        SCB_EnableDCache();
           
             delay(64);
     }
@@ -167,85 +193,85 @@ int main ( void )
     return ( EXIT_FAILURE );
 }
 
-	TS_ApplicationData* pCurrentApplicationData;
-	TS_ApplicationData* pUserApplicationData;
-	uint32_t u32StackPointerValue;
-	fpJumpHandler fpApplicationResetHandler;
-//		
-
-static void JumpToUserApplication(void)
-{
 //	TS_ApplicationData* pCurrentApplicationData;
 //	TS_ApplicationData* pUserApplicationData;
 //	uint32_t u32StackPointerValue;
 //	fpJumpHandler fpApplicationResetHandler;
-//		
-	/** Release Resources before jumping to User Application */
-//	udc_stop();
-//	sysclk_disable_peripheral_clock(CONSOLE_UART_ID);
-    
-    pCurrentApplicationData = P_GetApplicationData();
-    sprintf(str, "pCurrentApplicationData: %X\n", pCurrentApplicationData, 64);
-    UART3_Write(str, 64);
-    delay(16);
-    
-    pUserApplicationData = (TS_ApplicationData*)(pCurrentApplicationData->u32UserApplicationStartAddress +
-		pCurrentApplicationData->u32UserApplicationAllocationSize - sizeof(TS_ApplicationFooter));
-    sprintf(str, "pCurrentApplicationData: %X\n", pUserApplicationData, 64);
-    UART3_Write(str, 64);
-    delay(16);
-    
-	sprintf(str, "SCB->VTOR: %X\n", pUserApplicationData->u32UserApplicationStartAddress, 64);
-    UART3_Write(str, 64);
-    delay(16);
-    
-    	/** Update stack pointer */
-	u32StackPointerValue = (uint32_t)(*(uint32_t *)(pUserApplicationData->u32UserApplicationStartAddress));
-    sprintf(str, "u32StackPointerValue: %X\n", u32StackPointerValue, 64);
-    UART3_Write(str, 64);
-    delay(16);
-	
-	/** Call Application reset handler */
-	fpApplicationResetHandler = (fpJumpHandler)(*((uint32_t*)(pUserApplicationData->u32UserApplicationStartAddress + 4)));
-    sprintf(str, "fpApplicationResetHandler: %X\n", fpApplicationResetHandler, 64);
-    UART3_Write(str, 64);
-    delay(16);
-    
-	/** Disable interrupts */
-	__disable_irq();
-	
-	/** Get Application header data*/
-	pCurrentApplicationData = P_GetApplicationData();
-	
-	pUserApplicationData = (TS_ApplicationData*)(pCurrentApplicationData->u32UserApplicationStartAddress +
-		pCurrentApplicationData->u32UserApplicationAllocationSize - sizeof(TS_ApplicationFooter));
-    
-	
-	/** Barriers */
-	__DSB();
-	__ISB();
-
-	/** Update vector table */
-	SCB->VTOR = pUserApplicationData->u32UserApplicationStartAddress & SCB_VTOR_TBLOFF_Msk;
-	
-	/** Barriers */
-	__DSB();
-	__ISB();
-
-	/** Enable interrupts */
-	__enable_irq();
-
-	/** Update stack pointer */
-	u32StackPointerValue = (uint32_t)(*(uint32_t *)(pUserApplicationData->u32UserApplicationStartAddress));
-	__set_MSP(u32StackPointerValue);
-	
-	/** Call Application reset handler */
-	fpApplicationResetHandler = (fpJumpHandler)(*((uint32_t*)(pUserApplicationData->u32UserApplicationStartAddress + 4)));
-	(*fpApplicationResetHandler)();
-    
-}
-
-
+////		
+//
+//static void JumpToUserApplication(void)
+//{
+////	TS_ApplicationData* pCurrentApplicationData;
+////	TS_ApplicationData* pUserApplicationData;
+////	uint32_t u32StackPointerValue;
+////	fpJumpHandler fpApplicationResetHandler;
+////		
+//	/** Release Resources before jumping to User Application */
+////	udc_stop();
+////	sysclk_disable_peripheral_clock(CONSOLE_UART_ID);
+//    
+//    pCurrentApplicationData = P_GetApplicationData();
+//    sprintf(str, "pCurrentApplicationData: %X\n", pCurrentApplicationData, 64);
+//    UART3_Write(str, 64);
+//    delay(16);
+//    
+//    pUserApplicationData = (TS_ApplicationData*)(pCurrentApplicationData->u32UserApplicationStartAddress +
+//		pCurrentApplicationData->u32UserApplicationAllocationSize - sizeof(TS_ApplicationFooter));
+//    sprintf(str, "pCurrentApplicationData: %X\n", pUserApplicationData, 64);
+//    UART3_Write(str, 64);
+//    delay(16);
+//    
+//	sprintf(str, "SCB->VTOR: %X\n", pUserApplicationData->u32UserApplicationStartAddress, 64);
+//    UART3_Write(str, 64);
+//    delay(16);
+//    
+//    	/** Update stack pointer */
+//	u32StackPointerValue = (uint32_t)(*(uint32_t *)(pUserApplicationData->u32UserApplicationStartAddress));
+//    sprintf(str, "u32StackPointerValue: %X\n", u32StackPointerValue, 64);
+//    UART3_Write(str, 64);
+//    delay(16);
+//	
+//	/** Call Application reset handler */
+//	fpApplicationResetHandler = (fpJumpHandler)(*((uint32_t*)(pUserApplicationData->u32UserApplicationStartAddress + 4)));
+//    sprintf(str, "fpApplicationResetHandler: %X\n", fpApplicationResetHandler, 64);
+//    UART3_Write(str, 64);
+//    delay(16);
+//    
+//	/** Disable interrupts */
+//	__disable_irq();
+//	
+//	/** Get Application header data*/
+//	pCurrentApplicationData = P_GetApplicationData();
+//	
+//	pUserApplicationData = (TS_ApplicationData*)(pCurrentApplicationData->u32UserApplicationStartAddress +
+//		pCurrentApplicationData->u32UserApplicationAllocationSize - sizeof(TS_ApplicationFooter));
+//    
+//	
+//	/** Barriers */
+//	__DSB();
+//	__ISB();
+//
+//	/** Update vector table */
+//	SCB->VTOR = pUserApplicationData->u32UserApplicationStartAddress & SCB_VTOR_TBLOFF_Msk;
+//	
+//	/** Barriers */
+//	__DSB();
+//	__ISB();
+//
+//	/** Enable interrupts */
+//	__enable_irq();
+//
+//	/** Update stack pointer */
+//	u32StackPointerValue = (uint32_t)(*(uint32_t *)(pUserApplicationData->u32UserApplicationStartAddress));
+//	__set_MSP(u32StackPointerValue);
+//	
+//	/** Call Application reset handler */
+//	fpApplicationResetHandler = (fpJumpHandler)(*((uint32_t*)(pUserApplicationData->u32UserApplicationStartAddress + 4)));
+//	(*fpApplicationResetHandler)();
+//    
+//}
+//
+//
 static void BootloaderJumpHandler(void)
 {
 	/** Update Signature to indicate Boot loader */

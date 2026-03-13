@@ -8,7 +8,7 @@
  *    - RX: Interrupt-driven with ring buffer
  *    - TX: Interrupt-driven with ring buffer
  ************************************************/
-#include "uart_irq.h"
+#include "dev/M2_BSP/UART/uart_irq.h"
 #include <string.h>
 
 /*************************************************
@@ -147,8 +147,8 @@ Std_ReturnType UART_Driver_Init(void)
     uart_drivers[0].rx_overflow_count = 0;
     uart_drivers[0].rx_error_count = 0;
     
-    UART2_ReadCallbackRegister(UART_RX_Callback, (uintptr_t)&uart_drivers[0]);
-    UART2_WriteCallbackRegister(UART_TX_Callback, (uintptr_t)&uart_drivers[0]);
+    UART0_ReadCallbackRegister(UART_RX_Callback, (uintptr_t)&uart_drivers[0]);
+    UART0_WriteCallbackRegister(UART_TX_Callback, (uintptr_t)&uart_drivers[0]);
 
     UART2_REGS->UART_IER = UART_IER_RXRDY_Msk | 
                            UART_IER_OVRE_Msk | 

@@ -22,7 +22,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
-#include "peripheral/uart/plib_uart2.h"
+#include "peripheral/uart/plib_uart0.h"
 #include "M5_Utils/RingBuffer/ring_buffer.h"
 #include "M5_Utils/Define/define.h"
 
