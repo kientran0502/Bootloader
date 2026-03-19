@@ -1,4 +1,6 @@
 #include "bootloader.h"
+#include "bl_transport.h"
+
 
 void Bootloader_Init(BootloaderContext_t *ctx, BootloaderConfig_t *cfg)
 {
@@ -24,16 +26,16 @@ void Bootloader_Run(BootloaderContext_t *ctx)
             {
                 if (BlCommand_Execute(&ctx->commandCtx, pkt) == BL_STATUS_OK)
                 {
-//                    BlTransport_Write((uint8_t[]){BL_ACK}, 1);
+                   BlTransport_Write((uint8_t[]){BL_ACK}, 1);
                 }
                 else
                 {
-//                    BlTransport_Write((uint8_t[]){BL_NACK}, 1);
+                   BlTransport_Write((uint8_t[]){BL_NACK}, 1);
                 }
             }
             else
             {
-//                BlTransport_Write((uint8_t[]){BL_NACK}, 1);
+               BlTransport_Write((uint8_t[]){BL_NACK}, 1);
             }
 
             BlProtocol_Reset(&ctx->protocolCtx);

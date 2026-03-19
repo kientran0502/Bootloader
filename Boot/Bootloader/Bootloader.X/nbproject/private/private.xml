@@ -14,6 +14,7 @@
             <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/bl_types.h</file>
             <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/peripheral/uart/plib_uart3.c</file>
             <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/peripheral/efc/plib_efc.h</file>
+            <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/bootloader.h</file>
             <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/exceptions.c</file>
             <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/config/default/peripheral/uart/plib_uart0.c</file>
             <file>file:/E:/TASK_Y4/BootloaderSAM/Bootloader/Boot/Bootloader/src/bootloader.c</file>

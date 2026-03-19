@@ -112,7 +112,7 @@ static uint8_t mau8JumpSignature[32];
 
 //COMPILER_ALIGNED(128
 
-char str[64] = {0};
+uint32_t str[64] = {0};
 uint32_t arr[128] = {132, 124, 38, 54, 5, 6};
 
 void delay(uint8_t time)
@@ -142,7 +142,13 @@ int main ( void )
         /* Maintain state machines of all polled MPLAB Harmony modules. */
 //        SYS_Tasks ( );
 //		GPIO_PA23_Toggle();
-      Bootloader_Run(&blCtx);
+//      Bootloader_Run(&blCtx);
+//        SCB_DisableICache();
+//        SCB_DisableDCache();
+        uint32_t addr = U32_USER_APPLICATION_START_ADDRESS;
+        EFC_RegionUnlock(addr);
+        EFC_SectorErase(addr);
+        EFC_PageWrite(arr, addr);
 //        if(PIO_PortRead(PIO_PIN_PA9) == 0)
 //        {
 //        sprintf(str, "Jump To App\n", 13);
@@ -150,10 +156,10 @@ int main ( void )
 //        delay(16);
             // JumpToUserApplication();
 //        }
-
+        EFC_Read(str, sizeof(arr), addr);
 //           UART_Driver_Read(UART3_REGS, str, sizeof(str));
 // //          delay(32);
-//           UART_Driver_Write(UART3_REGS, str, 13);
+           UART_Driver_Write(UART3_REGS, str, 13);
            delay(32);
     }
 

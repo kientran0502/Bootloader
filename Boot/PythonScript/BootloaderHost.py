@@ -1,8 +1,8 @@
 import serial
 import struct
 import time
-import zlib
 import threading
+from CRC import calculate_crc32
 
 # ==============================
 # Protocol constants
@@ -43,7 +43,7 @@ def build_packet(cmd, data=b''):
 
     header = struct.pack("<BBB", START_BYTE, cmd, length)
     crc_input = struct.pack("<BB", cmd, length) + data
-    crc = zlib.crc32(crc_input) & 0xFFFFFFFF
+    crc = calculate_crc32(crc_input)
 
     return header + data + struct.pack("<I", crc)
 
@@ -182,7 +182,7 @@ def cmd_read(ser, addr, length):
     data = pkt[3:3+l]
     crc_rx = struct.unpack("<I", pkt[3+l:3+l+4])[0]
 
-    crc_calc = zlib.crc32(struct.pack("<BB", cmd, l) + data) & 0xFFFFFFFF
+    crc_calc = calculate_crc32(struct.pack("<BB", cmd, l) + data) & 0xFFFFFFFF
 
     if crc_rx != crc_calc:
         print("CRC mismatch")

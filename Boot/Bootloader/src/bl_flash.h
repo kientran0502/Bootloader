@@ -4,7 +4,7 @@
 #include "bl_types.h"
 
 /* Flash address config */
-#define BL_APP_START_ADDR   0x00410000U
+#define BL_APP_START_ADDR   0x00410000U /// ??nh ngh?a l?i
 #define BL_APP_MAX_SIZE     (512 * 1024)
 
 /* Init flash driver */

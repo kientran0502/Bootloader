@@ -1,8 +1,26 @@
-#include "bl_protocol.h"
-#include "bl_transport.h"
+# def crc32_32bit(data):
+#     crc = 0xFFFFFFFF
+#     polynomial = 0x04C11DB7
 
-static const uint32_t CRC_TABLE[256] =
-{
+#     crc ^= data  # XOR trực tiếp với số 32 bit input
+
+#     for i in range(32):  # xử lý 32 bit
+#         if (crc & 0x80000000):
+#             crc = crc  ^ polynomial
+#         else:
+#             crc <<= 1
+#         crc &= 0xFFFFFFFF  # giữ 32 bit
+
+#     return crc 
+
+# input_data = [0x12345678, 0x9ABCDEF0, 0x13579BDF]
+
+# for val in input_data:
+#     crc_result = crc32_32bit(val)
+#     print(f"CRC32 of {val:#0x} = 0x{crc_result:08X}")
+
+
+CRC_TABLE = [
     0x00000000, 0x04C11DB7, 0x09823B6E, 0x0D4326D9, 0x130476DC, 0x17C56B6B, 0x1A864DB2, 0x1E475005,
     0x2608EDB8, 0x22C9F00F, 0x2F8AD6D6, 0x2B4BCB61, 0x350C9B64, 0x31CD86D3, 0x3C8EA00A, 0x384FBDBD,
     0x4C11DB70, 0x48D0C6C7, 0x4593E01E, 0x4152FDA9, 0x5F15ADAC, 0x5BD4B01B, 0x569796C2, 0x52568B75,
@@ -35,119 +53,25 @@ static const uint32_t CRC_TABLE[256] =
     0xE3A1CBC1, 0xE760D676, 0xEA23F0AF, 0xEEE2ED18, 0xF0A5BD1D, 0xF464A0AA, 0xF9278673, 0xFDE69BC4,
     0x89B8FD09, 0x8D79E0BE, 0x803AC667, 0x84FBDBD0, 0x9ABC8BD5, 0x9E7D9662, 0x933EB0BB, 0x97FFAD0C,
     0xAFB010B1, 0xAB710D06, 0xA6322BDF, 0xA2F33668, 0xBCB4666D, 0xB8757BDA, 0xB5365D03, 0xB1F740B4,
-};
+]
 
-static uint32_t calculate_crc32(uint8_t *data, size_t len);
+def calculate_crc32(data):
+    
+    checksum = 0xFFFFFFFF
+    crc_packet = bytearray()  
 
-void BlProtocol_Init(BlProtocolContext_t *ctx)
-{
-    ctx->state = BL_PROTO_IDLE;
-    ctx->index = 0;
-    ctx->lastRxTime = 0;
-}
+    for byte in data:
+        crc_packet.extend([0x00, 0x00, 0x00, byte])
 
-BlStatus_t BlProtocol_Process(BlProtocolContext_t *ctx)
-{
-    uint8_t byte;
+    for byte in crc_packet:
+        top = (checksum >> 24) & 0xFF
+        top ^= byte
+        checksum = ((checksum << 8) & 0xFFFFFFFF) ^ CRC_TABLE[top]
 
-    while (BlTransport_ReadByte(&byte) == BL_STATUS_OK)
-    {
-//        ctx->lastRxTime = GetTick();
+    return checksum
 
-        switch (ctx->state)
-        {
-        case BL_PROTO_IDLE:
+input_data = [0x12, 0x9A, 0x13]
+crc_result = calculate_crc32(input_data)  # trả về int
+print(f"CRC32 = 0x{crc_result:08X}")
 
-            if (byte == BL_PACKET_START_BYTE)
-                ctx->state = BL_PROTO_CMD;
-            break;
-
-        case BL_PROTO_CMD:
-            ctx->packet.cmd = byte;
-            ctx->state = BL_PROTO_LEN;
-            break;
-
-        case BL_PROTO_LEN:
-            if (byte > BL_MAX_DATA_LEN)
-            {
-                ctx->state = BL_PROTO_ERROR;
-                break;
-            }
-            
-            ctx->packet.len = byte;
-            ctx->index = 0;
-            ctx->state = (byte == 0) ? BL_PROTO_CRC : BL_PROTO_DATA;
-            break;
-
-        case BL_PROTO_DATA:
-            ctx->packet.data[ctx->index++] = byte;
-            if (ctx->index >= ctx->packet.len)
-            {
-                ctx->index = 0;
-                ctx->state = BL_PROTO_CRC;
-            }
-            break;
-
-        case BL_PROTO_CRC:
-            ((uint8_t*)&ctx->packet.crc)[ctx->index++] = byte;
-            if (ctx->index >= 4)
-            {
-                ctx->state = BL_PROTO_COMPLETE;
-                return BL_STATUS_OK;
-            }
-            break;
-
-        default:
-            BlProtocol_Reset(ctx);
-            return BL_STATUS_ERROR;
-        }
-    }
-
-    return BL_STATUS_BUSY;
-}
-
-BlStatus_t BlProtocol_GetPacket(BlProtocolContext_t *ctx, BlPacket_t **pkt)
-{
-    if (ctx->state == BL_PROTO_COMPLETE) 
-    {
-        *pkt = &ctx->packet;
-        return BL_STATUS_OK;
-    }
-    return BL_STATUS_ERROR;
-}
-
-void BlProtocol_Reset(BlProtocolContext_t *ctx)
-{
-    ctx->state = BL_PROTO_IDLE;
-    ctx->index = 0;
-    ctx->lastRxTime = 0;
-}
-
-bool BlProtocol_VerifyCrc(BlPacket_t *pkt)
-{
-   uint32_t calcCrc = calculate_crc32((uint8_t*)&pkt->cmd, sizeof(pkt->cmd) + sizeof(pkt->len) + pkt->len);
-   return (calcCrc == pkt->crc);
-}
-
-static uint32_t calculate_crc32(uint8_t *data, size_t len)
-{
-    uint32_t checksum = 0xFFFFFFFF;
-
-    for (size_t i = 0; i < len; i++)
-    {
-        uint8_t byte = data[i];
-
-        // Python: crc_packet.extend([0x00,0x00,0x00, byte])
-        uint8_t packet[4] = {0x00, 0x00, 0x00, byte};
-
-        for (int j = 0; j < 4; j++)
-        {
-            uint8_t top = (checksum >> 24) & 0xFF;
-            top ^= packet[j];
-            checksum = (checksum << 8) ^ CRC_TABLE[top];
-        }
-    }
-
-    return checksum;
-}
 
