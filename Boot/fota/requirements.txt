@@ -1,0 +1,3 @@
+tqdm
+pyserial # Uncomment if using UART communication (e.g., for send_packet)
+RPi.GPIO

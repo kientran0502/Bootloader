@@ -32,6 +32,8 @@
 #include <stdint.h>
 #include <string.h>
 #include "peripheral/efc/plib_efc.h"
+#include "Dev/M2_BSP/UART/uart_irq.h"
+#include "bootloader.h"
 
 // ****************************** DEFINE ***********************************************
 #define U32_USB_CDC_BOOTLOADER_SW_RELEASE_MAJOR_VERSION		((uint32_t)0x1)
@@ -127,65 +129,32 @@ int main ( void )
     SYS_Initialize ( NULL );
 
 	/*Init*/
-	// UART_Driver_Init(void);
+    BootloaderContext_t blCtx = {0};
+    BootloaderConfig_t  blCfg = {0};
+    // cấu hình bootloader
+    blCfg.timeoutMs = 2000;
+	  UART_Driver_Init();
+    // init bootloader
+    Bootloader_Init(&blCtx, &blCfg);
 
     while ( true )
     {
         /* Maintain state machines of all polled MPLAB Harmony modules. */
 //        SYS_Tasks ( );
 //		GPIO_PA23_Toggle();
-
+      Bootloader_Run(&blCtx);
 //        if(PIO_PortRead(PIO_PIN_PA9) == 0)
 //        {
 //        sprintf(str, "Jump To App\n", 13);
-        UART3_Write("Jump To App\n", 13);
+//        UART3_Write("Jump To App\n", 13);
 //        delay(16);
             // JumpToUserApplication();
 //        }
-		// InitFlashWaitStates();
-        uint32_t addr = U32_USER_APPLICATION_START_ADDRESS;
 
-        SCB_DisableICache();
-        SCB_DisableDCache();
-
-        while(EFC_IsBusy());
-        EFC_RegionUnlock(addr);
-
-        while(EFC_IsBusy());
-        EFC_SectorErase(addr);
-
-        while(EFC_IsBusy());
-        EFC_PageWrite(arr, addr);
-
-        while(EFC_IsBusy());
-        
-        uint32_t *p = (uint32_t*)U32_USER_APPLICATION_START_ADDRESS;
-
-        sprintf(str, "%d\n",  p[0], 3);
-        UART3_Write(str, 3);
-        delay(32);
-        
-        sprintf(str, "%d\n",  p[1], 3);
-        UART3_Write(str, 3);
-        delay(32);
-        
-        sprintf(str, "%d\n",  p[2], 3);
-        UART3_Write(str, 3);
-        delay(32);
-        
-        sprintf(str, "%d\n",  p[3], 3);
-        UART3_Write(str, 3);
-        delay(32);
-        
-      
-        /* invalidate cache */
-        SCB_InvalidateICache();
-        SCB_InvalidateDCache();
-
-        SCB_EnableICache();
-        SCB_EnableDCache();
-          
-            delay(64);
+//           UART_Driver_Read(UART3_REGS, str, sizeof(str));
+// //          delay(32);
+//           UART_Driver_Write(UART3_REGS, str, 13);
+           delay(32);
     }
 
     /* Execution should not come here during normal operation */

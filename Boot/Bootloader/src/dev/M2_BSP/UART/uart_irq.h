@@ -30,8 +30,8 @@ extern "C" {
  *              CONFIGURATION                    *
  *************************************************/
 #define UART_DRIVER_COUNT              (1U)
-#define UART2_RX_BUFFER_SIZE           (1024U)
-#define UART2_TX_BUFFER_SIZE           (1024U)
+#define UART3_RX_BUFFER_SIZE           (1024U)
+#define UART3_TX_BUFFER_SIZE           (1024U)
 
 /*************************************************
  *              TYPE DEFINITIONS                 *

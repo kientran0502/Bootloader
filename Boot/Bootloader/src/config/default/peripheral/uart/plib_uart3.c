@@ -152,12 +152,17 @@ void __attribute__((used)) UART3_InterruptHandler( void )
     if(UART_SR_RXRDY_Msk == (UART3_REGS->UART_SR & UART_SR_RXRDY_Msk))
     {
         UART3_ISR_RX_Handler();
+        uintptr_t rxContext = uart3Obj.rxContext;
+        uart3Obj.rxCallback(rxContext);
+
     }
 
     /* Transmitter status */
     if(UART_SR_TXRDY_Msk == (UART3_REGS->UART_SR & UART_SR_TXRDY_Msk))
     {
         UART3_ISR_TX_Handler();
+        uintptr_t txContext = uart3Obj.txContext;
+        uart3Obj.txCallback(txContext);
     }
 }
 

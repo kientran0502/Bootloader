@@ -113,7 +113,12 @@ build/default/production/_ext/1360937237/main.o: ../src/main.c \
  ../src/config/default/peripheral/pio/plib_pio.h \
  ../src/config/default/peripheral/nvic/plib_nvic.h \
  ../src/config/default/peripheral/efc/plib_efc.h \
- ../src/config/default/peripheral/efc/plib_efc.h
+ ../src/config/default/peripheral/efc/plib_efc.h \
+ ../src/Dev/M2_BSP/UART/uart_irq.h \
+ ../src/config/default/peripheral/uart/plib_uart0.h \
+ ../src/dev/M5_Utils/RingBuffer/ring_buffer.h \
+ ../src/dev/M5_Utils/Define/define.h ../src/bootloader.h \
+ ../src/bl_types.h ../src/bl_protocol.h ../src/bl_command.h
 ../src/config/default/definitions.h:
 ../src/config/default/peripheral/uart/plib_uart3.h:
 ../src/config/default/peripheral/uart/plib_uart_common.h:
@@ -230,3 +235,11 @@ build/default/production/_ext/1360937237/main.o: ../src/main.c \
 ../src/config/default/peripheral/nvic/plib_nvic.h:
 ../src/config/default/peripheral/efc/plib_efc.h:
 ../src/config/default/peripheral/efc/plib_efc.h:
+../src/Dev/M2_BSP/UART/uart_irq.h:
+../src/config/default/peripheral/uart/plib_uart0.h:
+../src/dev/M5_Utils/RingBuffer/ring_buffer.h:
+../src/dev/M5_Utils/Define/define.h:
+../src/bootloader.h:
+../src/bl_types.h:
+../src/bl_protocol.h:
+../src/bl_command.h:

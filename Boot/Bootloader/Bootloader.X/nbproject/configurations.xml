@@ -180,6 +180,68 @@
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="src" displayName="src" projectFiles="true">
+        <logicalFolder name="config" displayName="config" projectFiles="true">
+          <logicalFolder name="default" displayName="default" projectFiles="true">
+            <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
+              <logicalFolder name="clk" displayName="clk" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="efc" displayName="efc" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="nvic" displayName="nvic" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="pio" displayName="pio" projectFiles="true">
+              </logicalFolder>
+              <logicalFolder name="uart" displayName="uart" projectFiles="true">
+              </logicalFolder>
+            </logicalFolder>
+            <logicalFolder name="stdio" displayName="stdio" projectFiles="true">
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="dev" displayName="dev" projectFiles="true">
+          <logicalFolder name="M2_BSP" displayName="M2_BSP" projectFiles="true">
+            <logicalFolder name="App" displayName="App" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="UART" displayName="UART" projectFiles="true">
+            </logicalFolder>
+          </logicalFolder>
+          <logicalFolder name="M5_Utils" displayName="M5_Utils" projectFiles="true">
+            <logicalFolder name="Define" displayName="Define" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="prnf" displayName="prnf" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="RingBuffer" displayName="RingBuffer" projectFiles="true">
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="packs" displayName="packs" projectFiles="true">
+          <logicalFolder name="ATSAMV71Q21B_DFP"
+                         displayName="ATSAMV71Q21B_DFP"
+                         projectFiles="true">
+            <logicalFolder name="component" displayName="component" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="instance" displayName="instance" projectFiles="true">
+            </logicalFolder>
+            <logicalFolder name="pio" displayName="pio" projectFiles="true">
+            </logicalFolder>
+          </logicalFolder>
+          <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+            <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+              <logicalFolder name="Core" displayName="Core" projectFiles="true">
+                <logicalFolder name="Include" displayName="Include" projectFiles="true">
+                </logicalFolder>
+              </logicalFolder>
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
+        <itemPath>../src/bl_command.h</itemPath>
+        <itemPath>../src/bl_flash.h</itemPath>
+        <itemPath>../src/bl_protocol.h</itemPath>
+        <itemPath>../src/bl_transport.h</itemPath>
+        <itemPath>../src/bl_types.h</itemPath>
+        <itemPath>../src/bootloader.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -305,9 +367,11 @@
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/AppAES_ICM.c</itemPath>
-        <itemPath>../src/AppFlash.c</itemPath>
-        <itemPath>../src/AppUART.c</itemPath>
+        <itemPath>../src/bl_command.c</itemPath>
+        <itemPath>../src/bl_flash.c</itemPath>
+        <itemPath>../src/bl_protocol.c</itemPath>
+        <itemPath>../src/bl_transport.c</itemPath>
+        <itemPath>../src/bootloader.c</itemPath>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
@@ -541,7 +605,7 @@
         <property key="communication.speed" value="2.000"/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="event.recorder.debugger.behavior" value="Running"/>
         <property key="event.recorder.enabled" value="false"/>
         <property key="event.recorder.scvd.files" value=""/>
@@ -1082,7 +1146,7 @@
         <property key="communication.speed" value="2.000"/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="event.recorder.debugger.behavior" value="Running"/>
         <property key="event.recorder.enabled" value="false"/>
         <property key="event.recorder.scvd.files" value=""/>
