@@ -2,10 +2,10 @@
 #define BL_FLASH_H
 
 #include "bl_types.h"
+#include "peripheral/efc/plib_efc.h"
 
 /* Flash address config */
-#define BL_APP_START_ADDR   0x00410000U /// ??nh ngh?a l?i
-#define BL_APP_MAX_SIZE     (512 * 1024)
+
 
 /* Init flash driver */
 void BlFlash_Init(void);
@@ -15,6 +15,8 @@ BlStatus_t BlFlash_Erase(uint32_t addr, uint32_t numberOfSectors);
 
 /* Write data */
 BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len);
+
+BlStatus_t BlFlash_Read(uint32_t addr, uint32_t *data, uint32_t len);
 
 /* Validate application */
 bool BlFlash_IsAppValid(void);

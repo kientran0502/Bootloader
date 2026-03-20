@@ -21,6 +21,10 @@
 #define BL_ACK   0x79
 #define BL_NACK  0x1F
 
+#define BL_APP_START_ADDR   0x0040C000U /// address where user app starts  (after 48KB bootloader)
+#define BL_APP_SIZE         (512 * 1024)  // 512KB max app size
+#define BL_APP_MAX_SIZE     (2000 * 1024)    // 2000KB max app size
+
 /* Generic status */
 typedef enum
 {

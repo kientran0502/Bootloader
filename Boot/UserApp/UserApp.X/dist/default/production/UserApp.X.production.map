@@ -81,7 +81,6 @@ Microchip PIC32 Memory-Usage Report By Module
 --------------------------------------------------------------------------------
          386           0           4         390         186    startup_xc32.o         build/default/production/_ext/1171490990/startup_xc32.o
          362           0           0         362         16a    interrupts.o           build/default/production/_ext/1171490990/interrupts.o
-         292           0           0         292         124    main.o                 build/default/production/_ext/1360937237/main.o
          168           0           0         168          a8    plib_pio.o             build/default/production/_ext/60177924/plib_pio.o
           64           8          28         100          64    crtbegin.o             C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/thumb/v7e-m+dp/hard/crtbegin.o
           96           0           0          96          60    plib_clk.o             build/default/production/_ext/60165520/plib_clk.o
@@ -92,6 +91,7 @@ Microchip PIC32 Memory-Usage Report By Module
           64           0           0          64          40    data_init              data_init
           58           0           0          58          3a    exceptions.o           build/default/production/_ext/1171490990/exceptions.o
           44           0           0          44          2c    initialization.o       build/default/production/_ext/1171490990/initialization.o
+          36           0           0          36          24    main.o                 build/default/production/_ext/1360937237/main.o
           30           0           0          30          1e    pic32_data_init_copy.o libpic32c.a
           18           0           0          18          12    pic32_data_init_clear.olibpic32c.a
           16           0           0          16          10    crtn.o                 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/thumb/v7e-m+dp/hard/crtn.o
@@ -99,7 +99,7 @@ Microchip PIC32 Memory-Usage Report By Module
            8           0           0           8           8    crti.o                 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/thumb/v7e-m+dp/hard/crti.o
            0           0           4           4           4    __environ.o            libc-musl.a
 --------------------------------------------------------------------------------
-        1862           8         120        1990         7c6    dist/default/production/UserApp.X.production.elf
+        1606           8         120        1734         6c6    dist/default/production/UserApp.X.production.elf
 
 
 Discarded input sections
@@ -328,13 +328,6 @@ LOAD build/default/production/_ext/1360937237/main.o
                 0x005fff00                        __rom_end = (ORIGIN (rom) + LENGTH (rom))
                 0x20460000                        __ram_end = (ORIGIN (ram) + LENGTH (ram))
 
-.ApplicationFooter
-                0x005fff00      0x100
- *(.ApplicationFooterData .ApplicationFooterData.*)
- .ApplicationFooterData
-                0x005fff00      0x100 build/default/production/_ext/1360937237/main.o
-                0x005fff00                sUserApplicationFooter
-
 .vectors        0x0040c000      0x168
                 0x0040c000                        . = ALIGN (0x4)
                 0x0040c000                        _sfixed = .
@@ -512,7 +505,7 @@ LOAD data_init
  .comment       0x00000035       0x36 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
  .comment       0x00000035       0x36 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
 
-.debug_info     0x00000000     0x5200
+.debug_info     0x00000000     0x5077
  .debug_info    0x00000000      0x483 build/default/production/_ext/60165520/plib_clk.o
  .debug_info    0x00000483      0xcee build/default/production/_ext/60167248/plib_efc.o
  .debug_info    0x00001171      0xc15 build/default/production/_ext/1865468468/plib_nvic.o
@@ -521,15 +514,15 @@ LOAD data_init
  .debug_info    0x0000290c      0x6d9 build/default/production/_ext/1171490990/interrupts.o
  .debug_info    0x00002fe5      0x688 build/default/production/_ext/1171490990/exceptions.o
  .debug_info    0x0000366d      0x97c build/default/production/_ext/1171490990/startup_xc32.o
- .debug_info    0x00003fe9      0x7c7 build/default/production/_ext/1360937237/main.o
- .debug_info    0x000047b0      0x212 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(data_init.o)
- .debug_info    0x000049c2      0x2fb C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__libc_start_main.o)
- .debug_info    0x00004cbd      0x276 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(libc.o)
- .debug_info    0x00004f33       0x97 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__environ.o)
- .debug_info    0x00004fca      0x110 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
- .debug_info    0x000050da      0x126 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
+ .debug_info    0x00003fe9      0x63e build/default/production/_ext/1360937237/main.o
+ .debug_info    0x00004627      0x212 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(data_init.o)
+ .debug_info    0x00004839      0x2fb C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__libc_start_main.o)
+ .debug_info    0x00004b34      0x276 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(libc.o)
+ .debug_info    0x00004daa       0x97 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__environ.o)
+ .debug_info    0x00004e41      0x110 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
+ .debug_info    0x00004f51      0x126 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
 
-.debug_abbrev   0x00000000     0x1240
+.debug_abbrev   0x00000000     0x11d0
  .debug_abbrev  0x00000000       0xcd build/default/production/_ext/60165520/plib_clk.o
  .debug_abbrev  0x000000cd      0x2cf build/default/production/_ext/60167248/plib_efc.o
  .debug_abbrev  0x0000039c      0x237 build/default/production/_ext/1865468468/plib_nvic.o
@@ -538,13 +531,13 @@ LOAD data_init
  .debug_abbrev  0x000007dd       0xd3 build/default/production/_ext/1171490990/interrupts.o
  .debug_abbrev  0x000008b0       0xde build/default/production/_ext/1171490990/exceptions.o
  .debug_abbrev  0x0000098e      0x21a build/default/production/_ext/1171490990/startup_xc32.o
- .debug_abbrev  0x00000ba8      0x16d build/default/production/_ext/1360937237/main.o
- .debug_abbrev  0x00000d15      0x156 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(data_init.o)
- .debug_abbrev  0x00000e6b      0x133 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__libc_start_main.o)
- .debug_abbrev  0x00000f9e       0xd4 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(libc.o)
- .debug_abbrev  0x00001072       0x62 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__environ.o)
- .debug_abbrev  0x000010d4       0xa2 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
- .debug_abbrev  0x00001176       0xca C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
+ .debug_abbrev  0x00000ba8       0xfd build/default/production/_ext/1360937237/main.o
+ .debug_abbrev  0x00000ca5      0x156 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(data_init.o)
+ .debug_abbrev  0x00000dfb      0x133 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__libc_start_main.o)
+ .debug_abbrev  0x00000f2e       0xd4 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(libc.o)
+ .debug_abbrev  0x00001002       0x62 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__environ.o)
+ .debug_abbrev  0x00001064       0xa2 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
+ .debug_abbrev  0x00001106       0xca C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
 
 .debug_aranges  0x00000000      0x2d0
  .debug_aranges
@@ -610,23 +603,23 @@ LOAD data_init
  .debug_line    0x00001e6d      0x11c C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
  .debug_line    0x00001f89      0x126 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
 
-.debug_str      0x00000000     0x2234
- .debug_str     0x00000000     0x2234 build/default/production/_ext/60165520/plib_clk.o
+.debug_str      0x00000000     0x206b
+ .debug_str     0x00000000     0x206b build/default/production/_ext/60165520/plib_clk.o
                                 0x4f0 (size before relaxing)
- .debug_str     0x00002234      0x5fb build/default/production/_ext/60167248/plib_efc.o
- .debug_str     0x00002234      0x9a2 build/default/production/_ext/1865468468/plib_nvic.o
- .debug_str     0x00002234      0x6df build/default/production/_ext/60177924/plib_pio.o
- .debug_str     0x00002234      0x372 build/default/production/_ext/1171490990/initialization.o
- .debug_str     0x00002234      0x9b7 build/default/production/_ext/1171490990/interrupts.o
- .debug_str     0x00002234      0x5e7 build/default/production/_ext/1171490990/exceptions.o
- .debug_str     0x00002234      0x5b1 build/default/production/_ext/1171490990/startup_xc32.o
- .debug_str     0x00002234      0x734 build/default/production/_ext/1360937237/main.o
- .debug_str     0x00002234      0x2f9 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(data_init.o)
- .debug_str     0x00002234      0x3e7 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__libc_start_main.o)
- .debug_str     0x00002234      0x352 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(libc.o)
- .debug_str     0x00002234      0x252 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__environ.o)
- .debug_str     0x00002234      0x28a C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
- .debug_str     0x00002234      0x291 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
+ .debug_str     0x0000206b      0x5fb build/default/production/_ext/60167248/plib_efc.o
+ .debug_str     0x0000206b      0x9a2 build/default/production/_ext/1865468468/plib_nvic.o
+ .debug_str     0x0000206b      0x6df build/default/production/_ext/60177924/plib_pio.o
+ .debug_str     0x0000206b      0x372 build/default/production/_ext/1171490990/initialization.o
+ .debug_str     0x0000206b      0x9b7 build/default/production/_ext/1171490990/interrupts.o
+ .debug_str     0x0000206b      0x5e7 build/default/production/_ext/1171490990/exceptions.o
+ .debug_str     0x0000206b      0x5b1 build/default/production/_ext/1171490990/startup_xc32.o
+ .debug_str     0x0000206b      0x56b build/default/production/_ext/1360937237/main.o
+ .debug_str     0x0000206b      0x2f9 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(data_init.o)
+ .debug_str     0x0000206b      0x3e7 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__libc_start_main.o)
+ .debug_str     0x0000206b      0x352 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(libc.o)
+ .debug_str     0x0000206b      0x252 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libc-musl.a(__environ.o)
+ .debug_str     0x0000206b      0x28a C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_clear.o)
+ .debug_str     0x0000206b      0x291 C:/Program Files/Microchip/xc32/v5.00/bin/bin/../../lib/gcc/pic32c/13.2.1/../../../../pic32c/lib/thumb/v7e-m+dp/hard\libpic32c.a(pic32_data_init_copy.o)
 
 .debug_frame    0x00000000      0x414
  .debug_frame   0x00000000       0x20 build/default/production/_ext/60165520/plib_clk.o

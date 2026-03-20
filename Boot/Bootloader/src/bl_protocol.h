@@ -3,7 +3,7 @@
 
 #include "bl_types.h"
 
-#define BL_MAX_DATA_LEN                     255
+#define BL_MAX_DATA_LEN                     252
 #define BL_PACKET_START_BYTE                0xAA
 #define BL_PACKET_SIZE                     (1 + 2 + BL_MAX_DATA_LEN + 4) // cmd + len + data + crc
 

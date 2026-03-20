@@ -81,11 +81,33 @@ LDLIBSOPTIONS=
 # fixDeps replaces a bunch of sed/cat/printf statements that slow down the build
 FIXDEPS=fixDeps
 
+# The following macros may be used in the pre and post step lines
+_/_=\\
+ShExtension=.bat
+Device=ATSAMV71Q21B
+ProjectDir="E:\TASK_Y4\BootloaderSAM\Bootloader\Boot\UserApp\UserApp.X"
+ProjectName=UserApp
+ConfName=default
+ImagePath="dist\default\${IMAGE_TYPE}\UserApp.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}"
+ImageDir="dist\default\${IMAGE_TYPE}"
+ImageName="UserApp.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}"
+ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+IsDebug="true"
+else
+IsDebug="false"
+endif
+MDFUHostPath="C:\Program Files\Microchip\MPLABX\v6.30\mplab_platform\mplab-pymdfu\bin\windows\pymdfu-bin.exe"
+PYFWImageBuilderPath="C:\Program Files\Microchip\MPLABX\v6.30\mplab_platform\mplab-pymdfu\bin\windows\pyfwimagebuilder-bin.exe"
+
 .build-conf:  ${BUILD_SUBPROJECTS}
 ifneq ($(INFORMATION_MESSAGE), )
 	@echo $(INFORMATION_MESSAGE)
 endif
 	${MAKE}  -f nbproject/Makefile-default.mk ${DISTDIR}/UserApp.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+	@echo "--------------------------------------"
+	@echo "User defined post-build step: [${MP_CC_DIR}\xc32-objcopy -O binary -R .config* "${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.elf" "${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.bin"]"
+	@${MP_CC_DIR}\xc32-objcopy -O binary -R .config* "${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.elf" "${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.bin"
+	@echo "--------------------------------------"
 
 MP_PROCESSOR_OPTION=ATSAMV71Q21B
 MP_LINKER_FILE_OPTION=,--script="..\src\config\default\ATSAMV71Q21B.ld"

@@ -151,10 +151,10 @@ __ram_end = ORIGIN(ram) + LENGTH(ram);
  *************************************************************************/
 SECTIONS
 {
-    .ApplicationFooter : 
+    /*.ApplicationFooter : 
 	{ 
 		KEEP(*(.ApplicationFooterData .ApplicationFooterData.*)) 
-	} > ApplicationFooter
+	} > ApplicationFooter */
 
     /*
      * The linker moves the .vectors section into itcm when itcm is

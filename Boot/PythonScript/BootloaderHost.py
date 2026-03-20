@@ -2,6 +2,7 @@ import serial
 import struct
 import time
 import threading
+import os
 from CRC import calculate_crc32
 
 # ==============================
@@ -19,7 +20,7 @@ CMD_JUMP  = 0x05
 ACK  = 0x79
 NACK = 0x1F
 
-CHUNK_SIZE = 255
+CHUNK_SIZE = 252
 
 # ==============================
 # Shared state
@@ -100,7 +101,7 @@ def rx_worker(ser):
 # Wait helpers
 # ==============================
 
-def wait_ack(timeout=2.0):
+def wait_ack(timeout=10.0):
     ack_event.clear()
     nack_event.clear()
 
@@ -115,7 +116,7 @@ def wait_ack(timeout=2.0):
     return False
 
 
-def wait_packet(timeout=2.0):
+def wait_packet(timeout=10.0):
     packet_event.clear()
 
     start = time.time()
@@ -143,6 +144,7 @@ def cmd_erase(ser):
 def cmd_write(ser, filename):
     try:
         with open(filename, "rb") as f:
+            print(f"File size: {os.path.getsize(filename)} bytes")
             addr = 0
 
             while True:
@@ -269,3 +271,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
