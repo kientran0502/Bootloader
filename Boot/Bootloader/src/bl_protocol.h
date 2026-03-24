@@ -3,9 +3,11 @@
 
 #include "bl_types.h"
 
-#define BL_MAX_DATA_LEN                     252
+#define BL_ADDR_DATA_LEN                    4
+#define BL_PAYLOAD_MAX_LEN                  248
+#define BL_MAX_DATA_LEN                     (BL_ADDR_DATA_LEN + BL_PAYLOAD_MAX_LEN) 
 #define BL_PACKET_START_BYTE                0xAA
-#define BL_PACKET_SIZE                     (1 + 2 + BL_MAX_DATA_LEN + 4) // cmd + len + data + crc
+#define BL_PACKET_SIZE                     (1 + 1 + BL_MAX_DATA_LEN + 4) // cmd + len + data + crc
 
 typedef struct
 {

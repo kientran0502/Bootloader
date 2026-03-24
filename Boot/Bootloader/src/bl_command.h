@@ -28,7 +28,7 @@ typedef enum
 typedef struct
 {
     BlTransactionState_t state;
-    uint32_t currentAddr;
+    // uint32_t currentAddr;
     uint32_t totalWritten;
     uint32_t lastActivityTime;
 } BlCommandContext_t;

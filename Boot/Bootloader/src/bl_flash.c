@@ -55,35 +55,60 @@ BlStatus_t BlFlash_Erase(uint32_t addr, uint32_t numberOfSectors)
 volatile uint32_t memory[252] = {0};
 BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)
 {
-    uint32_t qw[4];
-
-    while(len)
+//    uint32_t qw[4];
+//
+//    while(len)
+//    {
+//        uint32_t chunk = (len >= 16) ? 16 : len;
+//
+//        memset(qw, 0xFF, sizeof(qw));
+//        memcpy(qw, data, chunk);
+//
+//        if(!EFC_QuadWordWrite(qw, addr))
+//            return BL_STATUS_ERROR;
+//
+//        while(EFC_IsBusy());
+//        
+//        EFC_Read(memory, sizeof(memory), 0x0040c000);
+//        addr += 16;
+//        data += chunk;
+//        len  -= chunk;
+//    }
+    while (len > 0)
     {
-        uint32_t chunk = (len >= 16) ? 16 : len;
+        uint32_t alignedAddr = addr & ~0xF;      // align xu?ng 16 byte
+        uint32_t offset      = addr & 0xF;       // offset trong quadword
 
-        memset(qw, 0xFF, sizeof(qw));
-        memcpy(qw, data, chunk);
+        uint8_t buf[16];
+        memcpy(buf, (const void *)alignedAddr, 16);  // ??c quadword hi?n t?i
 
-        if(!EFC_QuadWordWrite(qw, addr))
+        uint32_t writeLen = 16 - offset;
+        if (writeLen > len)
+            writeLen = len;
+
+        memcpy(&buf[offset], data, writeLen);
+
+        if (!EFC_QuadWordWrite((uint32_t *)buf, alignedAddr))
             return BL_STATUS_ERROR;
 
-        while(EFC_IsBusy());
-        
-        EFC_Read(memory, sizeof(memory), 0x0040c000);
-        addr += 16;
-        data += chunk;
-        len  -= chunk;
+        while (EFC_IsBusy());
+
+        addr += writeLen;
+        data += writeLen;
+        len  -= writeLen;
     }
+
 
     return BL_STATUS_OK;
 }
 
-BlStatus_t BlFlash_Read(uint32_t addr, uint32_t *data, uint32_t len)
+BlStatus_t BlFlash_Read(uint32_t addr, uint8_t *data, uint32_t len)
 {
-    if (!EFC_Read(data, len, addr))
-    {
-        return BL_STATUS_ERROR;
-    }
+//    if (!EFC_Read(data, len, addr))
+//    {
+//        return BL_STATUS_ERROR;
+//    }
+    memcpy(data, (const void *)addr, len);
 
     return BL_STATUS_OK;
 }
