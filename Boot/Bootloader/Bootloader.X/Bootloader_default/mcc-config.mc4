@@ -11,6 +11,7 @@ modules:
 - efc
 - uart0
 - uart3
+- usart2
 generatedFileHashHistoryMap:
 - file: ..\src\config\default\ATSAMV71Q21B.ld
   hash: 0685903c7026c68a5d857ac6258bed5bd6e7748f91c87fdf878c5ecf8a8dccf6
