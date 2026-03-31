@@ -1,6 +1,6 @@
 build/default/production/_ext/216470852/uart_irq.o: \
  ../src/dev/M2_BSP/UART/uart_irq.c ../src/dev/M2_BSP/UART/uart_irq.h \
- ../src/config/default/peripheral/uart/plib_uart0.h \
+ ../src/config/default/peripheral/uart/plib_uart2.h \
  ../src/config/default/peripheral/uart/plib_uart_common.h \
  ../src/config/default/device.h \
  ../src/packs/ATSAMV71Q21B_DFP/samv71q21b.h \
@@ -111,7 +111,7 @@ build/default/production/_ext/216470852/uart_irq.o: \
  ../src/dev/M5_Utils/RingBuffer/ring_buffer.h \
  ../src/dev/M5_Utils/Define/define.h
 ../src/dev/M2_BSP/UART/uart_irq.h:
-../src/config/default/peripheral/uart/plib_uart0.h:
+../src/config/default/peripheral/uart/plib_uart2.h:
 ../src/config/default/peripheral/uart/plib_uart_common.h:
 ../src/config/default/device.h:
 ../src/packs/ATSAMV71Q21B_DFP/samv71q21b.h:

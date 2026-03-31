@@ -107,12 +107,17 @@ ENTRY(__XC32_RESET_HANDLER_NAME)
  *************************************************************************/
 MEMORY
 {
-  rom (rx)				: ORIGIN = 0x0040C000, LENGTH = 0x001F3F00
+ /* rom (LRX) : ORIGIN = ROM_ORIGIN, LENGTH = ROM_LENGTH
+  ram (WX!R) : ORIGIN = RAM_ORIGIN, LENGTH = RAM_LENGTH-__XC32_ITCM_LENGTH-__XC32_DTCM_LENGTH
+ itcm (WX) : ORIGIN = ITCM_ORIGIN, LENGTH = __XC32_ITCM_LENGTH
+dtcm (WX!R) : ORIGIN = DTCM_ORIGIN, LENGTH = __XC32_DTCM_LENGTH */
+
+ rom (rx)				: ORIGIN = 0x0040C000, LENGTH = 0x001F3F00
   ApplicationFooter(rx) : ORIGIN = 0x005FFF00, LENGTH = 0x00000100
   JumpSignature (rwx)	: ORIGIN = 0x20400000, LENGTH = 0x00000020
   ram (rwx)				: ORIGIN = 0x20400020, LENGTH = 0x0005FFE0
  itcm (WX) : ORIGIN = ITCM_ORIGIN, LENGTH = __XC32_ITCM_LENGTH  
-dtcm (WX!R) : ORIGIN = DTCM_ORIGIN, LENGTH = __XC32_DTCM_LENGTH
+dtcm (WX!R) : ORIGIN = DTCM_ORIGIN, LENGTH = __XC32_DTCM_LENGTH 
 
 }
 /*************************************************************************
@@ -151,10 +156,10 @@ __ram_end = ORIGIN(ram) + LENGTH(ram);
  *************************************************************************/
 SECTIONS
 {
-    /*.ApplicationFooter : 
+    .ApplicationFooter : 
 	{ 
 		KEEP(*(.ApplicationFooterData .ApplicationFooterData.*)) 
-	} > ApplicationFooter */
+	} > ApplicationFooter
 
     /*
      * The linker moves the .vectors section into itcm when itcm is

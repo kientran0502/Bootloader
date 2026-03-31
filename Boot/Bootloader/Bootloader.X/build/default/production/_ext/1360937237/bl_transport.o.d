@@ -1,7 +1,7 @@
 build/default/production/_ext/1360937237/bl_transport.o: \
  ../src/bl_transport.c ../src/bl_transport.h ../src/bl_types.h \
  ../src/Dev/M2_BSP/UART/uart_irq.h \
- ../src/config/default/peripheral/uart/plib_uart0.h \
+ ../src/config/default/peripheral/uart/plib_uart2.h \
  ../src/config/default/peripheral/uart/plib_uart_common.h \
  ../src/config/default/device.h \
  ../src/packs/ATSAMV71Q21B_DFP/samv71q21b.h \
@@ -114,7 +114,7 @@ build/default/production/_ext/1360937237/bl_transport.o: \
 ../src/bl_transport.h:
 ../src/bl_types.h:
 ../src/Dev/M2_BSP/UART/uart_irq.h:
-../src/config/default/peripheral/uart/plib_uart0.h:
+../src/config/default/peripheral/uart/plib_uart2.h:
 ../src/config/default/peripheral/uart/plib_uart_common.h:
 ../src/config/default/device.h:
 ../src/packs/ATSAMV71Q21B_DFP/samv71q21b.h:

@@ -14,18 +14,18 @@
 /*************************************************
  *                  BUFFERS                      *
  *************************************************/
-static RingBufElement uart3_rx_data[UART3_RX_BUFFER_SIZE];
-static RingBufElement uart3_tx_data[UART3_TX_BUFFER_SIZE];
+static RingBufElement uart2_rx_data[UART2_RX_BUFFER_SIZE];
+static RingBufElement uart2_tx_data[UART2_TX_BUFFER_SIZE];
 
 static UART_Driver_t uart_drivers[UART_DRIVER_COUNT] = {
     {
-        .uart              = UART3_REGS,
+        .uart              = UART2_REGS,
         .rx_buffer          = {0},
         .tx_buffer          = {0},
-        .rx_data            = uart3_rx_data,
-        .tx_data            = uart3_tx_data,
-        .rx_buffer_size     = UART3_RX_BUFFER_SIZE,
-        .tx_buffer_size     = UART3_TX_BUFFER_SIZE,
+        .rx_data            = uart2_rx_data,
+        .tx_data            = uart2_tx_data,
+        .rx_buffer_size     = UART2_RX_BUFFER_SIZE,
+        .tx_buffer_size     = UART2_TX_BUFFER_SIZE,
         .tx_busy            = false,
         .rx_error           = false,
         .rx_overflow_count  = 0,
@@ -136,11 +136,11 @@ Std_ReturnType UART_Driver_Init(void)
     /* [0] UART in list: Init following all step below: ----------- */
     /* Initialize ring buffers */
     RingBuffer_Create(&uart_drivers[0].rx_buffer, 1,
-                     "UART3_RX", uart_drivers[0].rx_data, 
+                     "UART2_RX", uart_drivers[0].rx_data, 
                      uart_drivers[0].rx_buffer_size);
     
     RingBuffer_Create(&uart_drivers[0].tx_buffer, 2,
-                     "UART3_TX", uart_drivers[0].tx_data, 
+                     "UART2_TX", uart_drivers[0].tx_data, 
                      uart_drivers[0].tx_buffer_size);
     
     uart_drivers[0].tx_busy = false;
@@ -148,10 +148,10 @@ Std_ReturnType UART_Driver_Init(void)
     uart_drivers[0].rx_overflow_count = 0;
     uart_drivers[0].rx_error_count = 0;
     
-    UART3_ReadCallbackRegister(UART_RX_Callback, (uintptr_t)&uart_drivers[0]);
-    UART3_WriteCallbackRegister(UART_TX_Callback, (uintptr_t)&uart_drivers[0]);
+    UART2_ReadCallbackRegister(UART_RX_Callback, (uintptr_t)&uart_drivers[0]);
+    UART2_WriteCallbackRegister(UART_TX_Callback, (uintptr_t)&uart_drivers[0]);
     
-    UART3_REGS->UART_IER = UART_IER_RXRDY_Msk | 
+    UART2_REGS->UART_IER = UART_IER_RXRDY_Msk | 
                            UART_IER_OVRE_Msk | 
                            UART_IER_FRAME_Msk | 
                            UART_IER_PARE_Msk;

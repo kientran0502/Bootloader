@@ -114,6 +114,7 @@ static uint8_t mau8JumpSignature[32];
 
 
 uint32_t arr[128] = {132, 124, 38, 54, 5, 6};
+uint8_t str1[32] = {0};
 
 void delay(uint8_t time)
 {
@@ -152,14 +153,14 @@ int main ( void )
 //        if(PIO_PortRead(PIO_PIN_PA9) == 0)
 //        {
 //        sprintf(str, "Jump To App\n", 13);
-//        UART3_Write("Jump To App\n", 13);
+//        UART2_Write("Jump To App\n", 13);
 //        delay(16);
 //             JumpToUserApplication();
 //        }
 //        EFC_Read(str, sizeof(arr), addr);
-//           UART_Driver_Read(UART3_REGS, str, sizeof(str));
-// //          delay(32);
-//           UART_Driver_Write(UART3_REGS, str, 13);
+//           UART_Driver_Read(UART2_REGS, str1, sizeof(str1));
+//           delay(32);
+//           UART_Driver_Write(UART2_REGS, str1, 13);
            delay(32);
     }
 

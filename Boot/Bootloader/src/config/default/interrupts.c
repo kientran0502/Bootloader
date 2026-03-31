@@ -78,7 +78,7 @@ void __attribute__((optimize("-O1"), long_call, noreturn, used))Dummy_Handler(vo
 }
 
 /* MISRAC 2012 deviation block start */
-/* MISRA C-2012 Rule 8.6 deviated 71 times.  Deviation record ID -  H3_MISRAC_2012_R_8_6_DR_1 */
+/* MISRA C-2012 Rule 8.6 deviated 72 times.  Deviation record ID -  H3_MISRAC_2012_R_8_6_DR_1 */
 /* Device vectors list dummy definition*/
 extern void SVCall_Handler             ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void PendSV_Handler             ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -90,6 +90,7 @@ extern void RTT_Handler                ( void ) __attribute__((weak, alias("Dumm
 extern void WDT_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void PMC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void EFC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void UART0_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void UART1_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void PIOA_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void PIOB_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -125,7 +126,7 @@ extern void AFEC1_Handler              ( void ) __attribute__((weak, alias("Dumm
 extern void TWIHS2_Handler             ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SPI1_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void QSPI_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void UART2_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void UART3_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void UART4_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TC2_CH0_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TC2_CH1_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -182,7 +183,7 @@ const H3DeviceVectors exception_table=
     .pfnWDT_Handler                = WDT_Handler,
     .pfnPMC_Handler                = PMC_Handler,
     .pfnEFC_Handler                = EFC_Handler,
-    .pfnUART0_Handler              = UART0_InterruptHandler,
+    .pfnUART0_Handler              = UART0_Handler,
     .pfnUART1_Handler              = UART1_Handler,
     .pfnPIOA_Handler               = PIOA_Handler,
     .pfnPIOB_Handler               = PIOB_Handler,
@@ -218,8 +219,8 @@ const H3DeviceVectors exception_table=
     .pfnTWIHS2_Handler             = TWIHS2_Handler,
     .pfnSPI1_Handler               = SPI1_Handler,
     .pfnQSPI_Handler               = QSPI_Handler,
-    .pfnUART2_Handler              = UART2_Handler,
-    .pfnUART3_Handler              = UART3_InterruptHandler,
+    .pfnUART2_Handler              = UART2_InterruptHandler,
+    .pfnUART3_Handler              = UART3_Handler,
     .pfnUART4_Handler              = UART4_Handler,
     .pfnTC2_CH0_Handler            = TC2_CH0_Handler,
     .pfnTC2_CH1_Handler            = TC2_CH1_Handler,

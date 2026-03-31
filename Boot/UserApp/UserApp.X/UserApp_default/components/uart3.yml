@@ -22,32 +22,10 @@ data:
     - children:
       - attributes:
           id: uart3
-          x: '217'
-          y: '175'
+          x: '62'
+          y: '206'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
-  symbols:
-    BRG_VALUE:
-      attributes:
-        id: BRG_VALUE
-      children:
-      - children:
-        - attributes:
-            id: uart3
-            value: '81'
-          type: Dynamic
-        type: Values
-      type: Integer
-    UART_CLOCK_FREQ:
-      attributes:
-        id: UART_CLOCK_FREQ
-      children:
-      - children:
-        - attributes:
-            id: uart3
-            value: '150000000'
-          type: Dynamic
-        type: Values
-      type: Integer
+  symbols: {}
   userData: {}

@@ -9,14 +9,12 @@ modules:
 - core
 - dfp
 - efc
-- uart0
-- uart3
-- usart2
+- uart2
 generatedFileHashHistoryMap:
 - file: ..\src\config\default\ATSAMV71Q21B.ld
   hash: 0685903c7026c68a5d857ac6258bed5bd6e7748f91c87fdf878c5ecf8a8dccf6
 - file: ..\src\config\default\definitions.h
-  hash: 6c14d52a292834d871da0b055e0d8eb36b740ea5e17f7ac7f38a8cc69d732a8f
+  hash: ea9867219d13d0b7621debdcfaee144440d7362adb6c203b7d21856b9d6c6395
 - file: ..\src\config\default\device.h
   hash: 2aecc75fe5031c595e00fd7fbe03793d1b9d34f12c8ae0b1fb8a8ade158a2071
 - file: ..\src\config\default\device_cache.h
@@ -26,15 +24,15 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\exceptions.c
   hash: de00e84d46e0d8933ee2fae9d699e08456443d4f80ac78f87edada9c35a9d15f
 - file: ..\src\config\default\initialization.c
-  hash: 888881c2a8f2e8e6dc40d441abb3c5547776c7430a2117e1a963d052458a551a
+  hash: 948aee31b4c28a86db8eb1988ce335008ca3b8d9bca209a2b92712ea90bdd402
 - file: ..\src\config\default\interrupts.c
-  hash: b586d13b0712f29812136a9667dba355f00efb72357e3d70011459a5c39688b3
+  hash: 748e17b27cee8439b3b85a8542fd20acfcaaa9eab56509474877efbd8781213f
 - file: ..\src\config\default\interrupts.h
-  hash: 8f1122631279b6dbf0762fd620e9053e377976ac31a871b41f0068e731f7456c
+  hash: 95e2e034dc921140921482cf6f6836d01eaa1d3e7fd80582a1dac79558cf75e4
 - file: ..\src\config\default\libc_syscalls.c
   hash: 88bb2e34c939601b5b7ad076556e3ee0fcedf388436b8cddb6d6fd3e9d07472f
 - file: ..\src\config\default\peripheral\clk\plib_clk.c
-  hash: ef7d3477085768ee92e3a00bf80c25fb4832685b21ce69ec8814cabf76b365a3
+  hash: 3bcc60f71c42c8d78c98b25231582f12f8d0a9a4f9ddd43a531b5f1ca0c2107d
 - file: ..\src\config\default\peripheral\clk\plib_clk.h
   hash: 4f80a7fdb2529a654f89f11159078b9ebad3e5dddbd7fe60c58df49c05c8e55d
 - file: ..\src\config\default\peripheral\efc\plib_efc.c
@@ -42,25 +40,21 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\efc\plib_efc.h
   hash: 7880a0c8d5ac47f4e0e4a173e28729e208a9807234ad9c26ac48c0948f8c9e90
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.c
-  hash: b43b6d843870579b9f0c53f674529fea3d9893a4c33135dee8c1344dc5e2e444
+  hash: 996baa892fb732fef2264b0ef53f04040361c9aec98bce0c546c96fe0d51a517
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.h
   hash: 9936ac782115af41003255283fa2f603f4ff2212d16275b7c80ea8d067a9e208
 - file: ..\src\config\default\peripheral\pio\plib_pio.c
-  hash: 8ef7523921ebcefeafbaef5047c7b67dd39d078ac38a8d466960bc95efe30e60
+  hash: b9f1d567e4381215d551864bc8d3f58aeacfbc20e3738eb184e72dc7cf7d3f9e
 - file: ..\src\config\default\peripheral\pio\plib_pio.h
   hash: 903ff7846bbbae283e958a501a42276b112a09cc31079a247d2647079290c38a
-- file: ..\src\config\default\peripheral\uart\plib_uart0.c
-  hash: 1c58bccf858f213a1c7ba143f784c8fb34780a564bc3ed2f6c166a6f426074a4
-- file: ..\src\config\default\peripheral\uart\plib_uart0.h
-  hash: 45a03626392e14047e4610fec7776ef4a535de60e48465ba1d0ae04a5e0c884e
-- file: ..\src\config\default\peripheral\uart\plib_uart3.c
-  hash: ef5a5edca1dab988cd5d0fe7eee5e2d4ecc94591358cbba44d6de7ebef6afbd1
-- file: ..\src\config\default\peripheral\uart\plib_uart3.h
-  hash: 1a5c73608ec6a2ff912bea4abd0e3169c353778265a41b4402fa84a4a1af31bf
+- file: ..\src\config\default\peripheral\uart\plib_uart2.c
+  hash: 83fdacbca627168c280c4cab6538cb51678e344c294e8cfe9356143a67bba802
+- file: ..\src\config\default\peripheral\uart\plib_uart2.h
+  hash: 6bc37e3223b61f69803f7fa24f2f457211835933dcad0e7f7026b80975167784
 - file: ..\src\config\default\peripheral\uart\plib_uart_common.h
   hash: 345a16690828c424b43be3f872bea3aedf52658df320f0db8de261fedb4f8274
 - file: ..\src\config\default\pin_configurations.csv
-  hash: b41fc2c83c683351e97e8d878f001da88e210a05f52d12eb47081e1a7dfd9eaa
+  hash: ebf1c20d8010c4ec6c55862077756ac525403961265768821e137ef6d277337b
 - file: ..\src\config\default\startup_xc32.c
   hash: eea4e495dc8487c0587ebfe6d915202cd456a4dde990a9847f3bd149ae8ec7d2
 - file: ..\src\config\default\stdio\xc32_monitor.c

@@ -8,7 +8,7 @@ void BlTransport_Init(void)
 
 BlStatus_t BlTransport_Write(uint8_t *data, uint16_t len)
 {
-    if(UART_Driver_Write(UART3_REGS, data, len) == 0)
+    if(UART_Driver_Write(UART2_REGS, data, len) == 0)
     {
         return BL_STATUS_ERROR;
     }
@@ -17,7 +17,7 @@ BlStatus_t BlTransport_Write(uint8_t *data, uint16_t len)
 
 BlStatus_t BlTransport_ReadByte(uint8_t *byte)
 {
-    int ret = UART_Driver_ReadByte(UART3_REGS);
+    int ret = UART_Driver_ReadByte(UART2_REGS);
 
     if(ret == -1)
     {

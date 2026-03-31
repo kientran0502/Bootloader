@@ -163,7 +163,7 @@ def cmd_ping(ser):
 
 def cmd_erase(ser):
     send_packet(ser, CMD_ERASE)
-    print("Erasing flash... (có thể mất đến 60s)", end="", flush=True)
+    print("Erasing flash... (có thể mất đến 30s)", end="", flush=True)
     t0 = time.time()
     ok = wait_ack(timeout=ERASE_TIMEOUT)
     print(f" {time.time()-t0:.1f}s — {'OK' if ok else 'FAIL'}")

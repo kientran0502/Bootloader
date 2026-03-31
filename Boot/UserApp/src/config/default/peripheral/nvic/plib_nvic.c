@@ -59,6 +59,10 @@ void NVIC_Initialize( void )
 
     /* Enable the interrupt sources and configure the priorities as configured
      * from within the "Interrupt Manager" of MHC. */
+    NVIC_SetPriority(UART2_IRQn, 7);
+    NVIC_EnableIRQ(UART2_IRQn);
+    NVIC_SetPriority(UART3_IRQn, 7);
+    NVIC_EnableIRQ(UART3_IRQn);
 
     /* Enable Usage fault */
     SCB->SHCSR |= (SCB_SHCSR_USGFAULTENA_Msk);

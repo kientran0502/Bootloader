@@ -85,23 +85,23 @@ typedef struct
 }TS_ApplicationFooter;
 
 
-// __attribute__ ((section(".ApplicationFooterData")))
-// const TS_ApplicationFooter sUserApplicationFooter =
-// {
-// 	{
-// 		U32_USB_CDC_USER_APP_SW_RELEASE_MAJOR_VERSION,
-// 		U32_USB_CDC_USER_APP_SW_RELEASE_MINOR_VERSION,
-// 		NULL,
-// 		U32_BOOT_LOADER_APPLICATION_START_ADDRESS,
-// 		U32_BOOT_LOADER_APPLICATION_ALLOCATED_SIZE,
-// 		U32_USER_APPLICATION_START_ADDRESS,
-// 		U32_USER_APPLICATION_ALLOCATED_SIZE,
-// 	},
-// 	{0},
-// 	{0},
-// };
+ __attribute__ ((section(".ApplicationFooterData")))
+ const TS_ApplicationFooter sUserApplicationFooter =
+ {
+ 	{
+ 		U32_USB_CDC_USER_APP_SW_RELEASE_MAJOR_VERSION,
+ 		U32_USB_CDC_USER_APP_SW_RELEASE_MINOR_VERSION,
+ 		NULL,
+ 		U32_BOOT_LOADER_APPLICATION_START_ADDRESS,
+ 		U32_BOOT_LOADER_APPLICATION_ALLOCATED_SIZE,
+ 		U32_USER_APPLICATION_START_ADDRESS,
+ 		U32_USER_APPLICATION_ALLOCATED_SIZE,
+ 	},
+ 	{0},
+ 	{0},
+ };
 
-
+uint8_t buf[32]= {0};
 int main ( void )
 {
     /* Initialize all modules */
@@ -116,6 +116,10 @@ int main ( void )
         {
             __NOP();
         }
+        
+        UART2_Read(buf, 32);
+        UART2_Write(buf,32);
+        
     }
 
     /* Execution should not come here during normal operation */

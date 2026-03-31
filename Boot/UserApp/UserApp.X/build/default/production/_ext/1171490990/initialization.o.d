@@ -1,8 +1,8 @@
 build/default/production/_ext/1171490990/initialization.o: \
  ../src/config/default/initialization.c \
  ../src/config/default/definitions.h \
- ../src/config/default/peripheral/clk/plib_clk.h \
- ../src/config/default/peripheral/pio/plib_pio.h \
+ ../src/config/default/peripheral/uart/plib_uart3.h \
+ ../src/config/default/peripheral/uart/plib_uart_common.h \
  ../src/config/default/device.h \
  ../src/packs/ATSAMV71Q21B_DFP/samv71q21b.h \
  ../src/packs/CMSIS/CMSIS/Core/Include/core_cm7.h \
@@ -109,11 +109,14 @@ build/default/production/_ext/1171490990/initialization.o: \
  ../src/config/default/device_cache.h ../src/config/default/device.h \
  ../src/config/default/toolchain_specifics.h \
  ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h \
+ ../src/config/default/peripheral/uart/plib_uart2.h \
+ ../src/config/default/peripheral/clk/plib_clk.h \
+ ../src/config/default/peripheral/pio/plib_pio.h \
  ../src/config/default/peripheral/nvic/plib_nvic.h \
  ../src/config/default/peripheral/efc/plib_efc.h
 ../src/config/default/definitions.h:
-../src/config/default/peripheral/clk/plib_clk.h:
-../src/config/default/peripheral/pio/plib_pio.h:
+../src/config/default/peripheral/uart/plib_uart3.h:
+../src/config/default/peripheral/uart/plib_uart_common.h:
 ../src/config/default/device.h:
 ../src/packs/ATSAMV71Q21B_DFP/samv71q21b.h:
 ../src/packs/CMSIS/CMSIS/Core/Include/core_cm7.h:
@@ -221,5 +224,8 @@ build/default/production/_ext/1171490990/initialization.o: \
 ../src/config/default/device.h:
 ../src/config/default/toolchain_specifics.h:
 ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h:
+../src/config/default/peripheral/uart/plib_uart2.h:
+../src/config/default/peripheral/clk/plib_clk.h:
+../src/config/default/peripheral/pio/plib_pio.h:
 ../src/config/default/peripheral/nvic/plib_nvic.h:
 ../src/config/default/peripheral/efc/plib_efc.h:

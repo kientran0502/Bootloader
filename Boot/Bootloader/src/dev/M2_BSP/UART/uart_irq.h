@@ -22,7 +22,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
-#include "peripheral/uart/plib_uart0.h"
+#include "peripheral/uart/plib_uart2.h"
 #include "M5_Utils/RingBuffer/ring_buffer.h"
 #include "M5_Utils/Define/define.h"
 
@@ -30,8 +30,8 @@ extern "C" {
  *              CONFIGURATION                    *
  *************************************************/
 #define UART_DRIVER_COUNT              (1U)
-#define UART3_RX_BUFFER_SIZE           (1024U)
-#define UART3_TX_BUFFER_SIZE           (1024U)
+#define UART2_RX_BUFFER_SIZE           (1024U)
+#define UART2_TX_BUFFER_SIZE           (1024U)
 
 /*************************************************
  *              TYPE DEFINITIONS                 *

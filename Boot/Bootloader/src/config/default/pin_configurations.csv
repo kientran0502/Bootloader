@@ -40,8 +40,8 @@
 48,PC7,,Available,In,,,,,,,
 49,PA15,,Available,In,,,,,,,
 51,PA14,,Available,In,,,,,,,
-52,PD25,,Available,In,,,,,,,
-53,PD26,,Available,In,,,,,,,
+52,PD25,,UART2_URXD2,n/a,n/a,No,Disabled,No,No,Disabled,Low
+53,PD26,,UART2_UTXD2,n/a,n/a,No,Disabled,No,No,Disabled,Low
 54,PC6,,Available,In,,,,,,,
 55,PD24,,Available,In,,,,,,,
 56,PA24,,Available,In,,,,,,,

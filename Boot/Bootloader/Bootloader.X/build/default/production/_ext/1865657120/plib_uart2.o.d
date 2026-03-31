@@ -1,5 +1,5 @@
-build/default/production/_ext/1865657120/plib_uart0.o: \
- ../src/config/default/peripheral/uart/plib_uart0.c \
+build/default/production/_ext/1865657120/plib_uart2.o: \
+ ../src/config/default/peripheral/uart/plib_uart2.c \
  ../src/config/default/device.h \
  ../src/packs/ATSAMV71Q21B_DFP/samv71q21b.h \
  ../src/packs/CMSIS/CMSIS/Core/Include/core_cm7.h \
@@ -106,7 +106,7 @@ build/default/production/_ext/1865657120/plib_uart0.o: \
  ../src/config/default/device_cache.h ../src/config/default/device.h \
  ../src/config/default/toolchain_specifics.h \
  ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h \
- ../src/config/default/peripheral/uart/plib_uart0.h \
+ ../src/config/default/peripheral/uart/plib_uart2.h \
  ../src/config/default/peripheral/uart/plib_uart_common.h \
  ../src/config/default/interrupts.h
 ../src/config/default/device.h:
@@ -216,6 +216,6 @@ build/default/production/_ext/1865657120/plib_uart0.o: \
 ../src/config/default/device.h:
 ../src/config/default/toolchain_specifics.h:
 ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h:
-../src/config/default/peripheral/uart/plib_uart0.h:
+../src/config/default/peripheral/uart/plib_uart2.h:
 ../src/config/default/peripheral/uart/plib_uart_common.h:
 ../src/config/default/interrupts.h:

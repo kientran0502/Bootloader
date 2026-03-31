@@ -1,14 +1,14 @@
 /*******************************************************************************
-  UART0 PLIB
+  UART2 PLIB
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    plib_uart0.h
+    plib_uart2.h
 
   Summary:
-    UART0 PLIB Header File
+    UART2 PLIB Header File
 
   Description:
     None
@@ -38,8 +38,8 @@
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
 
-#ifndef PLIB_UART0_H
-#define PLIB_UART0_H
+#ifndef PLIB_UART2_H
+#define PLIB_UART2_H
 
 #include "plib_uart_common.h"
 
@@ -57,36 +57,36 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#define UART0_FrequencyGet()    (uint32_t)(150000000UL)
+#define UART2_FrequencyGet()    (uint32_t)(150000000UL)
 
-/****************************** UART0 API *********************************/
+/****************************** UART2 API *********************************/
 
-void UART0_Initialize( void );
+void UART2_Initialize( void );
 
-UART_ERROR UART0_ErrorGet( void );
+UART_ERROR UART2_ErrorGet( void );
 
-bool UART0_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq );
+bool UART2_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq );
 
-bool UART0_Write( void *buffer, const size_t size );
+bool UART2_Write( void *buffer, const size_t size );
 
-bool UART0_Read( void *buffer, const size_t size );
+bool UART2_Read( void *buffer, const size_t size );
 
-bool UART0_WriteIsBusy( void );
+bool UART2_WriteIsBusy( void );
 
-bool UART0_ReadIsBusy( void );
+bool UART2_ReadIsBusy( void );
 
-size_t UART0_WriteCountGet( void );
+size_t UART2_WriteCountGet( void );
 
-size_t UART0_ReadCountGet( void );
+size_t UART2_ReadCountGet( void );
 
-bool UART0_ReadAbort(void);
+bool UART2_ReadAbort(void);
 
-void UART0_WriteCallbackRegister( UART_CALLBACK callback, uintptr_t context );
+void UART2_WriteCallbackRegister( UART_CALLBACK callback, uintptr_t context );
 
-void UART0_ReadCallbackRegister( UART_CALLBACK callback, uintptr_t context );
+void UART2_ReadCallbackRegister( UART_CALLBACK callback, uintptr_t context );
 
 
-bool UART0_TransmitComplete( void );
+bool UART2_TransmitComplete( void );
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -96,4 +96,4 @@ bool UART0_TransmitComplete( void );
 #endif
 
 // DOM-IGNORE-END
-#endif // PLIB_UART0_H
+#endif // PLIB_UART2_H
