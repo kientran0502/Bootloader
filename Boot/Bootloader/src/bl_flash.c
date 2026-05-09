@@ -124,19 +124,19 @@ BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)   // ?amt b
     while (len > 0) 
     {
         uint32_t aligned_addr = addr & ~0xF; // ??a ch? b?t ??u c?a QuadWord (chia h?t cho 16)
-        uint32_t offset = addr & 0xF;        // V? trí l?ch trong QuadWord
+        uint32_t offset = addr & 0xF;        // V? trï¿½ l?ch trong QuadWord
         uint32_t chunk = (16 - offset) > len ? len : (16 - offset);
 
         // 1. ??C: L?y 16 byte hi?n t?i t? Flash (bypass Cache)
         SCB_InvalidateDCache_by_Addr((uint32_t *)aligned_addr, 16);
-        uint32_t *src = (uint32_t *)aligned_addr;
+        uint32_t *src = (volatile uint32_t *)aligned_addr;
         uint32_t *dest = (uint32_t *)page_buffer;
         dest[0] = src[0]; dest[1] = src[1]; dest[2] = src[2]; dest[3] = src[3];
 
-        // 2. S?A: Ch? ?è ph?n d? li?u m?i nh?n t? UART vào ?úng v? trí
+        // 2. S?A: Ch? ?ï¿½ ph?n d? li?u m?i nh?n t? UART vï¿½o ?ï¿½ng v? trï¿½
         memcpy(&page_buffer[offset], data, chunk);
 
-        // 3. GHI: Ghi c? c?m 16 byte ?ã hoàn ch?nh vào Flash
+        // 3. GHI: Ghi c? c?m 16 byte ?ï¿½ hoï¿½n ch?nh vï¿½o Flash
         if (!EFC_QuadWordWrite((uint32_t *)page_buffer, aligned_addr)) {
             return BL_STATUS_ERROR;
         }
@@ -152,7 +152,7 @@ BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)   // ?amt b
 
 //BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)
 //{
-//    // 1. T?t Cache toàn c?c (N?u b?n không t?t ? main thì ?? ? ?ây)
+//    // 1. T?t Cache toï¿½n c?c (N?u b?n khï¿½ng t?t ? main thï¿½ ?? ? ?ï¿½y)
 //    SCB_DisableDCache(); 
 //    SCB_DisableICache();
 //    __DSB();
@@ -166,11 +166,11 @@ BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)   // ?amt b
 //        uint32_t offset      = addr & 0xF;
 //        uint32_t writeLen    = (16 - offset) > len ? len : (16 - offset);
 //
-//        // 2. READ-MODIFY-WRITE (Lúc này memcpy s? ??c TR?C TI?P t? Flash)
+//        // 2. READ-MODIFY-WRITE (Lï¿½c nï¿½y memcpy s? ??c TR?C TI?P t? Flash)
 //        memcpy(buf, (const void *)alignedAddr, 16);
 //        memcpy(&buf[offset], data, writeLen);
 //
-//        // 3. GHI VÀO FLASH
+//        // 3. GHI Vï¿½O FLASH
 //        if (!EFC_QuadWordWrite((uint32_t *)buf, alignedAddr)) {
 //            return BL_STATUS_ERROR;
 //        }
@@ -178,7 +178,7 @@ BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)   // ?amt b
 //        // 4. ??NG B? C?NG (R?t quan tr?ng cho file l?n)
 //        while (EFC_IsBusy());
 //        
-//        // ??c thanh ghi ?? ép Bus ??ng b? d? li?u th?c t? vào ô nh?
+//        // ??c thanh ghi ?? ï¿½p Bus ??ng b? d? li?u th?c t? vï¿½o ï¿½ nh?
 //        volatile uint32_t dummy = EFC_REGS->EEFC_FSR; 
 //        (void)dummy;
 //
@@ -188,7 +188,7 @@ BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)   // ?amt b
 //        len  -= writeLen;
 //    }
 
-    // 5. B?t l?i Cache sau khi n?p xong hoàn toàn (N?u c?n thi?t)
+    // 5. B?t l?i Cache sau khi n?p xong hoï¿½n toï¿½n (N?u c?n thi?t)
     // SCB_EnableICache();
     // SCB_EnableDCache();
 
@@ -208,13 +208,13 @@ BlStatus_t BlFlash_Write(uint32_t addr, uint8_t *data, uint32_t len)   // ?amt b
 
 BlStatus_t BlFlash_Read(uint32_t addr, uint8_t *data, uint32_t len)
 {
-    // 1. Vô hi?u hóa vùng Cache t??ng ?ng v?i ??a ch? c?n ??c
+    // 1. Vï¿½ hi?u hï¿½a vï¿½ng Cache t??ng ?ng v?i ??a ch? c?n ??c
     // ??m b?o CPU ph?i l?y d? li?u th?c t? Flash Memory
     SCB_InvalidateDCache_by_Addr((uint32_t *)addr, len);
     __DSB();
     __ISB();
 
-    // 2. Bây gi? memcpy m?i an toàn
+    // 2. Bï¿½y gi? memcpy m?i an toï¿½n
     memcpy(data, (const void *)addr, len);
 
     return BL_STATUS_OK;
